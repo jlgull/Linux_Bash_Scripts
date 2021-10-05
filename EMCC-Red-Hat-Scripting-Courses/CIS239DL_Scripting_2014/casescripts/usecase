@@ -1,0 +1,7 @@
+#!/bin/bash
+((y=10))   # change to 1 for a nope answer match
+case $y in
+1) echo "nope";;
+10) echo "yep";;
+*) echo "not here";;
+esac

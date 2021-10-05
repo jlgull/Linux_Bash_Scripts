@@ -1,0 +1,5 @@
+#!/bin/bash
+source /root/FunLibA
+/CIS239/extracredit/1setpssword
+/CIS239/extracredit/usernew
+

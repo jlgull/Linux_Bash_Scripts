@@ -1,0 +1,13 @@
+#!/bin/bash
+count=1
+for ((i=1;i<201;i++))
+do
+  if [[ $count -eq 10 ]]
+   then
+    echo word$i >> wordfile
+    count=0
+   else
+    echo -n "word$i " >> wordfile
+  fi 
+  ((count++))
+done

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while true
+do
+
+  if [[ `date +%H` == 14 ]]
+  then
+   echo "I am running the script"
+  fi
+done

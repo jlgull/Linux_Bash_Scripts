@@ -1,0 +1,13 @@
+#!/bin/bash
+((counter=1))
+while read text
+do 
+if [[ $counter -ne 15 ]]
+then
+((counter++))
+continue
+else
+((counter++))
+echo $text
+fi
+done < /etc/passwd

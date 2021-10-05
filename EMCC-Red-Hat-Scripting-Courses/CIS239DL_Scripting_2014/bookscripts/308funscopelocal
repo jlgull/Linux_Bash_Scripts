@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function function1
+{
+#local x
+((x=5))
+echo "Within function1: $x"
+return 0
+}
+
+((x=10))
+echo "Outside function1: $x"
+
+function1 
+
+echo "Outside function1 after executing funcion1: $x"
+

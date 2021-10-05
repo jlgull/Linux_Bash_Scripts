@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#ls /home | egrep -vw 'mike|randy' > removeus 
+ls /home > removeus 
+while read text
+do 
+userdel -r $text
+echo "$text has been removed"
+done < removeus

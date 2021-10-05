@@ -1,0 +1,33 @@
+#!/bin/bash
+
+p="Four Score and seven years ago"
+echo "Here is line 1"
+echo $p
+echo
+
+echo "The length of the line 1 is"
+echo ${#p} "characters"
+echo
+
+echo "Here are the first nine characters of line 1"
+echo ${p:0:9}
+echo
+
+echo "Here are the next nine characters of line 1"
+echo ${p:9:9}
+echo
+
+q="Our fathers brought forth a new nation"
+echo "Here is line 2"
+echo $q
+echo "The length of line 2 is"
+echo ${#q}
+echo
+
+r="$p $q"
+echo "Here are the two lines put together"
+echo $r
+echo
+
+echo "The length of both lines together is"
+echo ${#r}

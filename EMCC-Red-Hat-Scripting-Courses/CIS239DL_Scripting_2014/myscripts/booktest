@@ -1,0 +1,19 @@
+#! /bin/bash
+# code from book about case
+#set -xv
+clear
+
+echo "What would you like to do?"
+read answer
+case "$answer" in
+	eat)
+	echo "Have a burger"
+	;;
+	sleep)
+	echo "Good Night"
+	;;
+	*)
+	echo "Bad Choice"
+	;;
+esac
+#set +xv

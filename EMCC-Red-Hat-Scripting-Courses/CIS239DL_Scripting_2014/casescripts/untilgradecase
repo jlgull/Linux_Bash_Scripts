@@ -1,0 +1,29 @@
+#!/bin/bash
+cont="G"
+
+until [[ $cont == "C" ]]
+do
+
+#read -p "Enter a numeric grade for class participation: " grade
+#read -p "Enter a numeric grade for midterm exam: " mid
+#read -p "Enter a numeric grade for final exam: " finalx
+read -p "Enter another grade or type C to calculate and quit: " YorN
+
+((count=$count+1))
+((gradetot=$gradetot+$YorN))
+cont=`echo $YorN | tr [:lower:] [:upper:]`
+
+done
+if [[ $count -eq 1 ]]
+then
+((gradeavg=$gradetot))
+else
+((gradeavg=$gradetot / ($count-1) ))
+fi
+case $gradeavg in
+  [9][0-9]|[1][0][0]) echo "Well done, you get an \"A\" for the course!" ;;
+           [8][0-9]) echo "Nice work, you get a \"B\" for the course." ;;
+           [7][0-9]) echo "Fair work, you get a \"C\" for the course." ;;
+           [6][0-9]) echo "Sub par work, you get a \"D\" for the course." ;;
+                  *) echo "Unacceptable! You get an \"F\" for the course." ;;
+esac

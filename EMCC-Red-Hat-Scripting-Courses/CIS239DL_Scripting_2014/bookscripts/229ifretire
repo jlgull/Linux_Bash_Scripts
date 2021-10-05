@@ -1,0 +1,30 @@
+#!/bin/bash
+#demo some nested if statements with conditionals and logicals
+#Retirement requirements: 60 with 10 years of service OR 25 years of service
+
+read -p "Enter age: " age
+
+read -p "Enter years of Service: " years
+
+if [[ $age -ge $years ]]
+then
+
+     if [[ $age -ge 60 && $years -ge 10 ]]
+     then
+         echo "You may retire!"
+     else
+
+        if [[ $years -ge 25 ]]
+        then
+          echo "You may retire!"
+        else
+          echo "You do not meet the retirement requirements. You must be 60, you are $age, and have 10 years of service, you have $years years of service or have 25 years of service to retire."
+          ((ageneed=60-$age))
+          ((yearneedcombo=10-$years))
+          ((yearneed=25-$years))
+          echo "To retire using the age/service combo you need to be more $ageneed year(s) older and acquire $yearneedcombo more year(s) of service or you need to serve $yearneed more year(s) to meet the 25 years of service requirement."
+        fi
+     fi
+else
+echo "Invalid entry. Your age cannot be less than your years of service."
+fi

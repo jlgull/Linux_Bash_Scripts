@@ -1,0 +1,25 @@
+#!/bin/bash
+
+read -p "Destination: " dest
+dest=`echo $dest | tr [:lower:] [:upper:]`
+read -p "Class: " class
+class=`echo $class | tr [:lower:] [:upper:]`
+read -p "day: " day
+day=`echo $day | tr [:lower:] [:upper:]`
+
+if [[ $dest == "LAX" && $class == "C" && $day == "SAT" ]]
+then
+   echo '$50'
+
+  elif [[ $dest == "LAX" && $class == "C" ]]
+   then
+     echo '$75'
+   
+      elif [[ $dest == "LAX" ]]
+       then
+          echo '$80'
+else 
+  echo '$100'
+       
+   
+fi

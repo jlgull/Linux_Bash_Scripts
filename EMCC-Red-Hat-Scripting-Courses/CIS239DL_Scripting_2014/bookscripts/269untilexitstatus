@@ -1,0 +1,8 @@
+#!/bin/bash
+# Show that until statement continues while its exit status is 1
+#
+until ! true
+do
+    echo $?
+    sleep 1
+done     

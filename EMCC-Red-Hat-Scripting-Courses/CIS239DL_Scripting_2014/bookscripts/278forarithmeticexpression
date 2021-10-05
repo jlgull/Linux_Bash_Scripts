@@ -1,0 +1,6 @@
+#!/bin/bash
+# show how the for arithmetic expression works using an echo command and step of 3
+for ((num=1; num<11; num+=3 ))
+do
+   echo $num
+done

@@ -1,0 +1,9 @@
+#!/bin/bash
+colors[3]=tan
+echo ${#colors[3]}
+if [[ $(echo ${#colors[3]}) -eq 0 ]]
+then
+  echo "Element referenced by subscript 3 is empty."
+else
+   echo "Element referenced by subscript 3 contains $(echo ${colors[3]})"
+fi

@@ -1,0 +1,18 @@
+#! /bin/bash
+
+# using read to gather input
+#set -xv
+
+read -t 12 -p "Enter your first name: " first
+#if [[ $first null]]
+#then
+#	exit
+#fi
+
+read -t 2 -p  "Enter your middle name: " middle 
+read -t 2 -p "Enter your last name: " last
+
+echo "Your name is "$first $middle $last
+
+#set +xv
+

@@ -1,0 +1,29 @@
+#!/bin/bash
+#Show how to use a function to do this
+#Function is located in /root/LibFunB as funcheck_alpha
+
+alpha=y
+
+read -p "Enter a string: " str
+len=`echo ${#str}`
+
+for ((i=0;i<$len;i++))
+do
+   val=`echo ${str:i:1}`
+   echo $val | grep ^[[:alpha:]] > /dev/null
+   retval=$?
+
+   if [[ $retval -eq 1 ]]
+   then
+     alpha=n
+     break
+   fi
+done
+
+if [[ `echo $alpha | tr [[:lower:]] [[:upper:]]` == Y ]]
+then
+   echo "Value is alphabetic"
+else
+   echo "Value is not alhabetic"
+fi
+

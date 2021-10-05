@@ -1,0 +1,16 @@
+#!/bin/bash
+# script to show how the shift n command can allow for for more than 9
+# positional parameters to be used. This script takes 15 parameters which requires a
+# shift of 6 to capture all 15 parameters.
+# set -xv
+echo -n "the first 9 parameters that were entered are" $1 $2 $3 $4 $5 $6 $7 $8 $9 "and they are used to produce the first subtotal of" 
+(( subtotal1=$1+$2+$3+$4+$5+$6+$7+$8+$9 ))
+echo ' '$subtotal1
+shift 9
+echo "the next 6 parameters that were entered are" $1 $2 $3 $4 $5 $6
+(( subtotal2=$1+$2+$3+$4+$5+$6 ))
+echo "the second subtotal is" $subtotal2 
+(( total=$subtotal1+$subtotal2 ))
+echo "and when added to the first subtotal yield a total of" $total
+# set +xv
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+count=0
+{ declare -x names; }
+while read text
+do
+ { names[$count]=$text; }
+((count++))
+done < /CIS239/Projects/arrayfile
+{ set names;export -a names; }
+echo ${names[*]}

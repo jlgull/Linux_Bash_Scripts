@@ -1,0 +1,10 @@
+#!/bin/bash
+
+read -p "Enter deposit amount: " dep
+
+if [[ $dep -le 0 || $dep -gt 10000 ]]
+then
+   echo "Deposit amount is invalid. Try again."
+else
+   echo "Deposit amount accepted."
+fi

@@ -1,0 +1,40 @@
+#! /bin/bash
+# Jonathan Heard for CIS239DL Fall 2014
+# Tue Oct  7 18:13:00 MST 2014
+
+# Loop script for menu system
+
+# set condition prior to loop
+cont="y"
+while [[ $cont == "y" ]]
+do
+clear
+	echo "Selection 1 = Run Usb Copy"
+	echo "Selection 2 = Make a new Shell Script"
+	echo "Selection 3 = Run the Content Function"
+	echo "beginning of menu"
+	echo "beginning of menu"
+
+  read -p "Enter your Selection: " choice
+
+case $choice in
+	1)
+	/root/myscripts/usbcopy
+	;;
+	2)
+	read -p "Enter new Shell Script name: " newshell
+	vis $newshell
+	;;
+	3)
+	read -p "Enter absolute path for Content: " newshell
+	content $newshell
+	;;
+	*)
+	echo "Invalid choice"
+	;;
+esac
+
+read -p "Do you want to continue?" cont
+
+done
+ 

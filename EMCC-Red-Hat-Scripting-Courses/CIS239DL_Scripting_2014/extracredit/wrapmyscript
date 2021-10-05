@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+read -p "Enter password: " pass
+if [[ $pass == "letmein" ]]
+then
+ls -l /CIS239/extracredit/myscript
+echo "As you can see myscript is not executable"
+sleep 3
+echo "Changing myscript to executable"
+sudo -u root chmod 555 /CIS239/extracredit/myscript
+ls -l /CIS239/extracredit/myscript
+sleep 3
+bash /CIS239/extracredit/myscript
+else
+echo "Wrong Password!"
+if [[ -d  /$USER ]]
+then
+sudo -u root mkdir $USER
+sudo -u root chmod 777 /$USER
+
+sudo -u root echo "$USER tried to run payroll program wihout correct password at `date`" >> /$USER/tried
+else
+sudo -u root mkdir /$USER
+sudo -u root chmod 777 /$USER
+sudo -u root echo "$USER tried to run payroll program wihout correct password at `date`" >> /$USER/tried
+
+fi
+fi
+ sudo -u root chmod 666 /CIS239/extracredit/myscript
+sudo -u root chmod 770 /$USER

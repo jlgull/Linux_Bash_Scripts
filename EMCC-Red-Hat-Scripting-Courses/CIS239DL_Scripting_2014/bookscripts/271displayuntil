@@ -1,0 +1,22 @@
+#!/bin/bash
+# Use date function to display a message until a certain time
+#
+declare -i minute
+declare -i timeremaining
+minute=`date +%M`
+while [[ $minute -gt 1 ]]
+do
+    ((timeremaining=20-$minute))
+if [[ $timeremaining -lt 1 ]]
+then
+echo "YOU ARE FIRED.DO NOT BOTHER TURING IN YOUR TIME SHEET"
+exit
+elif [[ $timeremaining -eq 1 ]]
+then   echo "You have ONLY" $timeremaining" minute to complete daily time sheet, or else!!!"
+else
+    echo "You have" $timeremaining" minutes to complete daily time sheet, or else!!!"
+fi
+     sleep 15
+     minute=`date +%M`
+    
+done

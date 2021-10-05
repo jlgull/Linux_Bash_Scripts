@@ -1,0 +1,23 @@
+#!/bin/bash
+
+dialog --menu "Menu List" 10 60 5 1 "Backup All Scripts" 2 "Display Class Scripts" 2>$HOME/menu.$$
+
+status=$?
+
+if [[ $status -eq 0 ]]
+then
+ans=`cat $HOME/menu.$$`
+
+case $ans in
+       "1")  cp -r /CIS239 /backup/ ;;
+       "2")  cd /CIS239/bookscripts/*; ls ;;
+        *)   echo "Invalid choice" ;;
+esac
+
+rm $HOME/menu.$$
+
+else 
+
+echo "Exiting....."
+
+fi

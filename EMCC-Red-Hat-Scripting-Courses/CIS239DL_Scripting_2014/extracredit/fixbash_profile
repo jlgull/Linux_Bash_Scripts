@@ -1,0 +1,29 @@
+#!/bin/bash
+day=$(date +%A)
+daynum=$(date +%d)
+month=$(date +%B)
+year=$(date +%Y)
+case $daynum in
+ [0][1]|[2][1]|[3][1]) suffix="st"
+;;
+ [0][2]|[2][2]) suffix="nd"
+;;
+ [0][3]|[2][3]) suffix="rd"
+;;
+  *) suffix="th"
+;;
+esac
+
+case $daynum in
+[0][1]) daynum=1;;
+[0][2]) daynum=2;;
+[0][3]) daynum=3;;
+[0][4]) daynum=4;;
+[0][5]) daynum=5;;
+[0][6]) daynum=6;;
+[0][7]) daynum=7;;
+[0][8]) daynum=8;;
+[0][9]) daynum=9;;
+*) daynum=$daynum;;
+esac
+echo "Today is $day the $daynum$suffix of $month in year $year" 

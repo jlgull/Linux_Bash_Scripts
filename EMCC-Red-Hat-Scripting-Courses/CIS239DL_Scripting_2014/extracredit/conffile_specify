@@ -1,0 +1,15 @@
+#!/bin/bash
+# lists all the .conf files but wont list all the other BS.
+#updatedb
+ls -R / | grep .conf$ | grep $1. > /root/located
+while read text
+do
+locate /*/$text >> /root/found
+done < /root/located
+sort /root/found > /root/temp
+uniq /root/temp > /root/uniq
+cat /root/uniq 
+rm -fr /root/located
+rm -fr /root/found
+rm -fr /root/temp
+rm -fr /root/uniq

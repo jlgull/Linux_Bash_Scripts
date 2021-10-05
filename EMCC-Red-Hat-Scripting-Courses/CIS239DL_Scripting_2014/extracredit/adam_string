@@ -1,0 +1,12 @@
+#!/bin/bash
+num=$#
+echo $num
+if [[ $1 == "isgod" ]]
+then
+echo "Hello World"
+#elif [[ $1 == "stopme" ]]
+#then
+#echo "Stop the world and let me off"
+else
+echo "Goodbye World"
+fi

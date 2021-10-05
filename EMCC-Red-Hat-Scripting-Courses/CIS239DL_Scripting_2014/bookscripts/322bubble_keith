@@ -1,0 +1,111 @@
+#!/bin/bash
+#Enter 10 numbers - do a buble sort - then multiply the largest and numbers
+#By Keith Killgore
+#11/21/07
+
+declare -a num
+
+function getnum
+{
+	#Collects 10 integers into an array
+	for ((i=0;i<=9;i++))
+	do
+		read -p "Enter an integer: " num[$i]
+#                echo $i
+#		echo "Value $i is ${num[$i]}"
+
+	done
+# display numbers as enered
+echo "here is what you entered ${num[0]} ${num[1]} ${num[2]} ${num[3]} ${num[4]} ${num[5]} ${num[6]} ${num[7]} ${num[8]} ${num[9]}"
+ }
+
+
+function sortnum
+{
+	#decending sort
+	for ((c=1;c<=10;c++))
+	do
+#		echo "c is $c"
+	for ((d=1;d<=10;d++))
+	do
+#		echo "c is $c amd d is $d"
+		if [[ num[0] -lt num[1] ]]
+		then
+#			echo "${num[0]}  ${num[1]}"
+			temp=${num[0]}
+			num[0]=${num[1]}
+			num[1]=$temp
+#			echo "${num[0]}  ${num[1]}"
+		elif [[ num[1] -lt num[2] ]]
+		then
+#			echo "${num[1]}  ${num[2]}"
+	                temp=${num[1]}
+	                num[1]=${num[2]}
+	                num[2]=$temp
+#        	        echo "${num[1]}  ${num[2]}"	
+		elif [[ num[2] -lt num[3] ]]
+	        then
+#	                echo "${num[2]}  ${num[2]}"
+	                temp=${num[2]}
+        	        num[2]=${num[3]}     		         
+			num[3]=$temp
+#               	echo "${num[2]}  ${num[3]}"
+		elif [[ num[3] -lt num[4] ]]
+	        then
+#	                echo "${num[3]}  ${num[4]}"
+	                temp=${num[3]}
+        	        num[3]=${num[4]}
+                	num[4]=$temp
+#                	echo "${num[3]}  ${num[4]}"
+		elif [[ num[4] -lt num[5] ]]
+        	then
+#	                echo "${num[4]}  ${num[5]}"
+        	        temp=${num[4]}
+  	                num[4]=${num[5]}
+                	num[5]=$temp
+#                	echo "${num[4]}  ${num[5]}"
+		elif [[ num[5] -lt num[6] ]]
+   	        then
+#                	echo "${num[5]}  ${num[5]}"
+                	temp=${num[5]}
+                	num[5]=${num[6]}
+                	num[6]=$temp
+#                	echo "${num[5]}  ${num[6]}"
+		elif [[ num[6] -lt num[7] ]]
+        	then
+#                	echo "${num[6]}  ${num[7]}"
+                	temp=${num[6]}
+                	num[6]=${num[7]}
+                	num[7]=$temp
+#                	echo "${num[6]}  ${num[7]}"
+		elif [[ num[7] -lt num[8] ]]
+        	then
+#                	echo "${num[7]}  ${num[8]}"
+                	temp=${num[7]}
+                	num[7]=${num[8]}
+                	num[8]=$temp
+#                	echo "${num[7]}  ${num[8]}"
+		elif [[ num[8] -lt num[9] ]]
+        	then
+#        	        echo "${num[8]}  ${num[9]}"
+                	temp=${num[8]}
+                	num[8]=${num[9]}
+                	num[9]=$temp
+#                	echo "${num[8]}  ${num[9]}"
+		fi 
+	done
+	done
+	echo "here is how it sorted ${num[0]} ${num[1]} ${num[2]} ${num[3]} ${num[4]} ${num[5]} ${num[6]} ${num[7]} ${num[8]} ${num[9]}"
+}
+
+function mult
+{
+	highest=${num[0]}
+	lowest=${num[9]}
+	((product=$lowest*$highest))
+	echo "The results of multiplying the largest number by the smallest number is $product"
+}
+#Here is where we actually run the script
+getnum
+sortnum
+mult

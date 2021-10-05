@@ -1,0 +1,11 @@
+#! /bin/bash
+# Jonathan Heard for CIS239DL Fall 2014
+# Mon Oct  6 19:57:31 MST 2014
+# Create basic scipt to create a content using the ls -a option
+for names in $( ls -a $1 )
+do
+	echo $names
+done
+
+home=`pwd`"/"
+cd $1

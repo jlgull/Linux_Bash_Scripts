@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Step 3
+Array[0]=5
+Array[1]=10
+Array[4]=2
+Array[2]=100
+Array[3]=7
+
+# Step 4
+echo ${Array[*]}"    " "This is a list of all array members in order"
+
+# Step 6
+((t=3))  # initialize "t" to a value of 3
+echo ${Array[3]}  "      " 'the value of the array member with subscript [3]'
+echo ${Array[t]}  "      " 'the value of t is 3 so echo ${Array[3]} is executed'
+echo ${Array[(t+1)/2]} "    "  '(t+1)/2=(3+1)/2=2  so echo ${Array[2]} is executed'
+echo ${Array[${Array[4]}]} "    "   'Array[4]=2 so echo ${Array[2] is executed'
+((Array[5]=${Array[1]} + ${Array[3]}))  
+echo '[1]=10 and [3]=7 so ((Array[5]=${Array[1]} + ${Array[3]})) = 17'  
+echo ${Array[5]} "     " 'the value of ${Array[5]}'

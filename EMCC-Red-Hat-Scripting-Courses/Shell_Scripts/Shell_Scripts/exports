@@ -1,0 +1,6 @@
+# /var/ftp/pub/hr-backup is the export directory (Or what we are sharing)
+# The * means all computers on my network
+# Instead of the * I could have specified the following
+# 192.168.0.2/255.255.255.0
+#
+/var/ftp/pub/hr-backup *(rw,async,no_root_squash)

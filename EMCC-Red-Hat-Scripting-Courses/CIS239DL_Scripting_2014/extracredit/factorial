@@ -1,0 +1,18 @@
+#!/bin/bash
+if [[ $# > 1 ]]
+then
+echo "You entered more than one parameter, disregarding all values except $1"
+fi
+if [[ $# < 1 ]]
+then
+echo "Usage $0 requires one command line parameter"
+echo "You did not enter a parameter, eg ./factorial 7"
+sleep 2
+exit
+fi
+((Q=$1*($1-1)))
+for ((x=$1-2; x>0; x--))
+do
+((Q=$Q*x))
+done
+echo "$Q is the factorial of $1"

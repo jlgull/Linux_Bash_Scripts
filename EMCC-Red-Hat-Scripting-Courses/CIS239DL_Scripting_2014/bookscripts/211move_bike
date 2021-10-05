@@ -1,0 +1,10 @@
+#!/bin/bash
+
+touch bike.txt
+
+if mv bike.txt bike2.txt
+then
+  echo "Move completed successfully - file moved. Status: " $? #2>/dev/null
+else
+   echo "Move unsuccessful - file not moved. Status: " $?  #2>/dev/null
+fi #2>/dev/null

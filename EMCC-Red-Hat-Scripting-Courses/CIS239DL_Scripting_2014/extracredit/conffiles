@@ -1,0 +1,26 @@
+#!/bin/bash
+# list all the .conf files but wont list all the other BS.
+read -p "Have you run updatedb recently (y or n):  " update
+if [[ $update == "n" ]]
+then
+echo "Running updatedb as root"
+echo "this may take a few minutes"
+updatedb
+fi
+ls -R / 2>/dev/null | grep .conf$ >> /root/located
+while read text
+do
+echo $text
+if [[ -f /*/$text ]]
+then
+echo $text >> /root/dir
+fi
+#locate /*/$text >> /root/found
+done < /root/located
+sort /root/dir > /root/temp
+uniq /root/temp > /root/uniq
+cat /root/uniq |less 
+#rm -fr /root/located
+rm -fr /root/found
+rm -fr /root/temp
+#rm -fr /root/uniq

@@ -1,0 +1,42 @@
+#!/bin/bash
+#Program determines the number of prime numbers
+#between 1,000,000 and 2,000,000
+# set +xv
+check=0
+for (( x=1000001; x <= 1999999; x=x+2 ))
+do
+     echo "x's value is now" $x
+	#sleep .5
+    if [[ (($x%3 != 0)) && (($x%5 != 0)) && (($x%7 != 0))  && (($x%11 != 0)) && (($x%13 != 0)) && (($x%17 != 0)) && (($x%19 != 0)) && (($x%23 != 0)) && (($x%29 != 0)) && (($x%31 != 0)) && (($x%37 = 0)) ]]
+    then
+         echo $x "made it through the filter"
+         sleep 1
+	 ((processed=$processed+1))
+	 echo $processed
+	 sleep 1
+            for (( y=39; y<=999999; y++))
+            do
+              echo "y is now $y"
+              echo "x is now $x"
+              ((r=$x%$y))
+                 if [[ $r = 0 ]]
+                 then
+                    echo $x "is evenly divisible by" $y
+                    check = 1
+                    # ((processed = processed + 1))
+                    # echo $processed
+                    #break
+                 fi
+            done
+     fi
+
+   if [[ check = 0 ]]
+   then
+      echo "$x is prime"
+      ((counter=$counter+1))
+   fi
+done
+echo "The chance of picking a prime number between 1 and 2 million is $counter in a million"
+echo "The amount of numbers that made it through the filter was $processed"
+          
+     

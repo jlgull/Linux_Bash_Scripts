@@ -1,0 +1,47 @@
+#!/bin/bash
+cont=y
+count=0
+while [[ $cont == "y" ]]
+do
+
+read -p "Enter product name; " prod
+read -p "Enter class code (h-hardware,s-software,m-misc): " class
+read -p "Enter price of item: " price
+array[$count]="$prod:$class:$price"
+((count++))
+read -p "Do you wish to enter another order? If so enter y. " cont
+done
+
+#Print receipt
+
+for ((i=0;i<$count;i++))
+do
+  ((num=i+1))
+  echo -n "$num) " ;echo ${array[i]}
+done
+
+keepon=y
+while [[ $keepon == "y" ]]
+do
+read -p "Do you wish to remove any items? y or n. " remove
+if [[ $remove == "y" ]]
+then
+read -p "Enter the item number of the item you wish to remove. " num
+array[$num-1]="`echo ${array[$num -1]}|cut -d: -f1` removed"
+
+echo "Item $num removed"
+fi
+read -p "Do you wish to remove another item? y or n. " keepon
+done
+
+echo "Your receipt ################"
+for ((i=0;i<$count;i++))
+do
+  ((num=i+1))
+  echo -n "$num) " ;echo ${array[i]}
+done
+for ((i=0;i<$count;i++))
+do
+((total=$total+`echo ${array[i]} | cut -d: -f3`))
+done 2>/dev/null
+echo "Total owed equals $total"

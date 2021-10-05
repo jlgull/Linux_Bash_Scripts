@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm -fr testtt
+
+echo "Enter a range of user ids to delete"
+read -p "Enter the lower limit of user ids to delete: " lower
+#read -p "Enter the uppper limit of user ids to delete: " upper
+
+awk -F: '{if ($3 -ge $lower ) print $1 }' /etc/passwd > testtt
+
+while read text
+do
+userdel -r $text
+done < testtt 

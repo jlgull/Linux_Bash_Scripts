@@ -1,0 +1,123 @@
+#!/bin/bash
+#set -xv
+# word_jumble - a word is picked, scrambled and then the user is asked to guess
+# what the original word was... The number of tries will be kept tracked of. 
+# The user may select 'next' to see the solution and generate a new challenge or
+# select 'done' to see the answer and exit the program.
+
+# The rand function randomly generates a 0 or 1. This basically
+# will operate as a toggle switch.
+# It is later called by the scramble function to assist in scrambling
+# a retrieved word.
+function rand ()
+{
+#number=0
+RANGE=2
+number=$RANDOM
+(( number %= $RANGE ))
+}
+
+
+# The scramble function randomly retrieves a word from /usr/lib/games/long-words.txt.
+# The retrieved word will be saved in a variable called match and the scrambled
+# version of this word will be saved in a variable called srambled.
+function scramble
+{
+number1=0
+RANGE1=2881  #there are 2881 entries in the long-words.txt file           
+number1=$RANDOM  # generate a number between 0 and 655600
+(( number1 %= $RANGE1 )) # using modulus division by 2881, the resultant must be between 0 and 2881
+if [[ $number1 -eq 0 ]]  #checks to make sure that line 0 is not selected 
+then
+     while [[ $number1 -eq 0 ]] #if line 0 was selected, keep trying unil it isn't
+     do
+       number1=$RANDOM  
+       (( number1 %= $RANGE1 )) #make sure number1 is not 0 and set number1
+     done
+fi
+
+  # pick a word randomly from the wordlib, and scramble it
+  # Original word is 'match' and scrambled word is 'scrambled'
+  match=`cat /usr/lib/games/long-words.txt | head -$number1 | tail -1 | sed 's/ //g' | sed 's/\r//'`
+# set match equal to the result of this command and remove all trailing spaces and end of line characters(\r).
+(( words = $total + 1 ))
+  echo " I picked out word $words for you that is ${#match} letters long to unscramble. Good Luck!" # Using ${#match} turns the match variable into an array of characters and will return the number of characters in that array or essentially the length of the word selected.
+
+
+  for (( val=1;$val<=${#match};val++ )) #depending on the length of the word selected ${#match} do a for loop determined by the length of the word selected.
+  do
+    rand   # call the rand function to toggle whether to put the next character first or last as the variable is built.
+    if [[ $number -eq 1 ]] ; then
+      scrambled="$scrambled`echo $match | cut -c$val`"  # if toggle is 1 then put this character at the end of the variable that is being built, namely, scrambled. The for loop will do this for each character in the selected word.
+    else
+     scrambled="`echo $match | cut -c$val`$scrambled"  # if toggle is not 1 then put this character at the beginning of the variable that is being built, namely, scrambled. The for loop will do this for each character in the selected word.
+    fi
+ done
+}
+
+# most likely you will have to uncomment the commented lines of code below for most users.
+# if you uncomment the lines below then the user will be directed to where the dictionary file can be obtained.
+
+if [ ! -r $wordlib ] ; then
+  echo "$0: Missing word library $wordlib" >&2
+  echo "online at http://www.intuitive.com/wicked/examples/long-words.txt" >&2
+  echo "save the file as /usr/lib/games/long-words.txt and you're ready to play!" >&2
+  exit 1
+fi
+
+# the user must save the file to /usr/share/games/long-words.txt
+newgame=""; guesses=0; correct=0; total=0 # reset variables  
+guess="goon"  #set initial value for guess to make sure it does not meet the criteria of the until loop
+until [[ $guess == "done" ]] 
+do
+  scramble   #call the function scramble
+
+  echo "You need to unscramble  " $scrambled   #show the scrambled word
+  (( total=$total+1 ))                         # keep a total of the scrambled words presented 
+        (( right=0 ))
+     while [[ $guess != "done" && $guess != "next" ]] #if done or next is not selected then enter loop   
+     do
+         read  -p "Your guess or (done|next)   " guess  #read user guess or next to continue or done to finish
+            if [[ $guess == "$match" ]]      #check for correct answer
+            then
+                (( guesses=$guesses+1 ))
+                (( tries=$tries+1 ))
+                echo "*** You got it with $guesses guesses!  Well done!! ***"  
+                (( correct=$correct+1 ))   #keep track of correct answers
+                scrambled=""   #reset scrambled to nothing
+                guess="goon"   #reset guess to goon so that the until loop and while loop for next will continue
+                guesses=0      #reset guesses for this particular scrambled word 
+                          #exit loop if the correct answer was supplied
+                (( right=1 ))
+             elif [[ $guess == "next" ]]     #check to see if user selected to go on to the next scrambled word
+             then
+                 if [[ $right == 0 ]]
+                 then
+                    echo "The unscrambled word was $match."  #if next is typed then return the scrambled word and
+                 fi
+#                 echo " Your tries: "$guesses             # generate a new challenge word
+                 scrambled=""
+                 guess="goon"     #set guess to goon to continue the until loop
+                 guesses=0
+                 break
+             elif [[ $guess == "done" ]]  #exit the program after displaying information about the number of
+             then                           #guesses and how many words were guessed correctly.
+                 if [[ $right == 0 ]]
+                  then
+                 echo "The unscrambled word was $match."   # Display the unscrambled word
+                 fi
+#                 echo " Your tries: "$guesses"              #Display the number of guesses for this paticular word
+                 scrambled=""
+               
+              else
+                 echo "Nope. That is not the unscrambled word. Try again."  #Message to acknowledge a wrong attempt
+                 (( guesses=$guesses+1 ))  # keep track of guesses for this word
+                 (( tries=$tries+1 ))      # keep track of guesses for all words
+              fi
+     done
+done
+
+echo "Done!" 
+echo "You correctly figured out $correct of the $total scrambled words."
+echo "You guessed $tries times"
+set +xv

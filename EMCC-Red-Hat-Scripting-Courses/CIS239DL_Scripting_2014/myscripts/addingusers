@@ -1,0 +1,16 @@
+#! /bin/bash
+
+
+
+while read text
+do
+first=`echo $text | cut -d: -f1`
+last=`echo $text | cut -d: -f2`
+echo $test $first $last
+echo $first$last >> /root/deletthem
+adduser $first$last
+passwd --stdin $first$last < /root/pwordfile
+done < /root/users
+cat /etc/passwd | tail -n 3
+
+exit

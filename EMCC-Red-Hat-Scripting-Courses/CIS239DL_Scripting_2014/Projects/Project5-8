@@ -1,0 +1,24 @@
+#!/bin/bash
+# script to accept and protect data when it is passed to a script
+# all parameters are protected, but only city is tested
+name=$1         #mike
+address=$2      #1313 mockingbird lane
+city=$3         #mockingbird heights
+state=$4        #AZ
+phone=$5        #555-0000
+fax=$6          #555-1111
+email=$7        #mike@emcc.com
+# I am now going to make all of the variables readonly, I know I only asked you to make city readonly.
+readonly name address city state phone fax email
+echo "Name: " $name
+echo "Address: " $address
+echo "City: " $city
+echo "State: " $state
+echo "Phone: " $phone
+echo "Fax: " $fax
+echo "Email: " $email
+# because city is readonly when the next line tries to execute it will fail and send an error message to the screen
+city="Phoenix"
+# the city remains mockingbird heights after attempting to change to Phoenix
+# for the readonly variable city
+echo $city

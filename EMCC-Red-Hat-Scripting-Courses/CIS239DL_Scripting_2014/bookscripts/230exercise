@@ -1,0 +1,47 @@
+#!/bin/bash
+#exercise to show the nesting of if statements to make several conditions necessary for a true evaluation
+
+
+read -p "Enter destination   LAX, PHX, DFW, PHL : "  dest
+dest1=`echo $dest | tr [:lower:] [:upper:]`  
+read -p "Enter class  A B C : " class 
+class1=`echo $class | tr [:lower:] [:upper:]`  
+read -p "Enter day  MON TUE WED THU FRI SAT SUN : " day
+day1=`echo $day | tr [:lower:] [:upper:]`  
+
+if [[ $dest1 == "LAX" ]]   # 1 = LAX
+then
+   if [[ $class1 == "C" ]] # 3 = C Class
+   then
+      if [[ $day1 == "SAT" ]] # 6 = SAT
+      then
+         echo "Coach class to LAX on Saturday costs \$50"
+      else
+         echo "Coach class to LAX not on Saturday costs \$75"
+      fi
+   else
+      echo "Not coach class to LAX is \$80 everyday"
+   fi
+else
+   echo "All flights not going to LAX are \$100"
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

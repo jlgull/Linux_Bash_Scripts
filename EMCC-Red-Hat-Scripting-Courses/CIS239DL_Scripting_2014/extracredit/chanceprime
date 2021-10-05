@@ -1,0 +1,35 @@
+
+#!/bin/bash
+#Program determines the number of prime numbers
+#between 100 and 1000
+check=0
+for ((x=101;x<201;x++))
+do
+      for ((y=3;y<101;y=$y+2))
+      do
+           echo "y is now $y"
+           echo "x is now $x"
+           ((r = $x%$y))
+               if [[ $r -eq 0 ]]
+               then
+                  echo "$x is evenly divisible by $y"
+                  ((check=1))
+                  ((processed=$processed + 1))
+else 
+((check=0))
+
+               fi
+          done
+                  echo "processed equal " $processed
+     
+     
+   if [[ $check -eq 0 ]]
+   then
+      echo "$x is prime" >> /root/primes
+      ((counter++))
+   fi
+done
+echo "The chance of picking a priime number between 100 and 1000 is $counter in a hundred"
+#echo "The amount of number that made it through the filter was $processed"
+          
+     

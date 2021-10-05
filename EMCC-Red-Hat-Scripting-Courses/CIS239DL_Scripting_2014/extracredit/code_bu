@@ -1,0 +1,15 @@
+#!/bin/bash
+mkdir -p /test
+for ((i=1;i<3;i++))
+do
+touch /tmp/files/*.dat
+find /tmp/files -amin 1 >> /root/capture
+mkdir -p /test/"$i"backup"$(date)"
+while read text
+do
+cp -f $text >> /test/"$i"backup"$(date)"/
+done < /root/capture
+rm -f /root/capture
+sleep 60
+done
+

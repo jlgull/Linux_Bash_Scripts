@@ -1,0 +1,13 @@
+#!/bin/bash
+#set -xv
+declare -i x   #set variable as x integer
+((x=50))
+((total=$x * 4))   
+echo "Value of total $total"
+((criteria=100))      # change value of var criteria to 101 to change case match
+echo "Value of criteria $criteria"
+case $criteria in 
+100|200|201) echo "We matched the criteria of 100 or 200 or 201 so we will reveal the total as $total" ;;
+*) echo "We did not match the criteria so we will reveal the criteria as $criteria" ;;
+esac
+#set +xv

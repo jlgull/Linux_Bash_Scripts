@@ -1,0 +1,18 @@
+#!/bin/bash
+# To run this script with the arbitrary precision calculator type bc -q bc_example
+
+
+
+scale=4
+upperlimit=3
+
+for (i=1; i<=upperlimit; i++) {
+
+print "Enter grade value: " ; grade[i]=read()
+tot=tot + grade[i]
+}
+
+avg = tot / upperlimit
+print "\nAverage is: " ; avg
+quit
+

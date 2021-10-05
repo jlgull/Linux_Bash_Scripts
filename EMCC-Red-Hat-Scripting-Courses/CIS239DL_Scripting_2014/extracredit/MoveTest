@@ -1,0 +1,8 @@
+if mv bike1 bike2
+then
+echo "Move successful"
+echo "status = "$?
+else
+echo "status = "$?
+echo "Move unsuccessful"
+fi

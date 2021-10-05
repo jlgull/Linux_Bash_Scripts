@@ -1,0 +1,50 @@
+#!/bin/bash
+#Demo some arithmetic operators    
+
+#INCREMENT AND DECREMENT
+
+t=15
+((t++))   #same as for writing (( t=t+1 ))
+echo $t
+
+((t--))
+let "t--"     #same as writing ((t=t-1))
+echo $t
+
+((t++))      #same as writing ((t=t+1))
+((t++))
+((t++))
+echo $t
+
+
+#   +  -  * /    are used as they always were
+
+
+
+#EXPONTIATION
+
+((power=2**8))     #raise 2 to the 8th power
+echo $power 
+
+#MODULUS DIVISION (REMAINDER)
+
+((rem=100%3))      #what remains after 3 no longer goes into 100     33*3=99   so rem is 1
+echo $rem    
+
+#COMPARISON OPERATORS
+
+# ==  equal to                              (($x==2))
+# !=  not equal to                          (($x!=2))
+# >=  greater than or equal to              (($x>=2))
+# <=  less than or equal to                 (($x<=2))
+# >   greater than                          (($x>2))
+# <   less than                             (($x<2)) 
+# &&  and operator  both must be true       (($x>=2 && $x<=15))
+# ||  or operator   only one must be true   (($x<=2 || $x>=15))
+
+
+if [[ $t>=2 && $t<=15 ]]; then
+echo "$t is greater than 1 and less than 16"
+else
+echo "$t is not greater than 1 or $t is not less than 16"
+fi

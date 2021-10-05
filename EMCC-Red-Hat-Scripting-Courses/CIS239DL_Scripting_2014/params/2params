@@ -1,0 +1,12 @@
+#!/bin/bash
+# accept a number and create a file using that number as a suffix
+# show what the script thinks the first parameter is and then store that
+# value in a variable called suffix that will be appended to the word file
+# to create a dynamic file name with a .txt extension
+echo $1 "is what will be stored in the variable suffix and tacked on to the end of the word 'file' to create a file with the format file(suffix).txt"
+sleep 7
+suffix=$1
+touch file$suffix.txt
+echo "This text is going to become the contents of file$suffix.txt" > file$suffix.txt
+cat file$suffix.txt
+exit

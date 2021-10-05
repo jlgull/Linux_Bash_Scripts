@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read -p "Enter total number of entries: " total
+for ((n=0;n<$total;n++))
+do
+read -p "Enter value:  " entries[$n]
+
+done
+##DISPLAY
+for ((n=0;n<$total;n++))
+do
+echo "Value $n is ${entries[$n]}"
+done

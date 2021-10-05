@@ -1,0 +1,12 @@
+#!/bin/bash
+
+dialog --menu "Payroll Menu" 10 60 5 1 "Insert Employee" 2 "Delete Employee" 3 "View Payroll File" 9 "Exit" 2>$HOME/menu.dat
+num=`cat $HOME/menu.dat`
+case $num in
+      1) $HOME/bin/dialinsA ;;
+      2) $HOME/bin/dialdelA ;;
+      3) dialog --textbox $HOME/bin/pay.dat 10 30;;
+      9) dialog --msgbox "Exiting" 10 20 ;;
+      *) echo "Invalid" ;;
+esac
+

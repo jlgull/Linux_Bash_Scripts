@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cal
+day=$(date +%A)
+dom=`date +%d`
+month=$(date +%B)
+echo
+echo "Today is $day, the "$dom"th of "$month
+echo
+who

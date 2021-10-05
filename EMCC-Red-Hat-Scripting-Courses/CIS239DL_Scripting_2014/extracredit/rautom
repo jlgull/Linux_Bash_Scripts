@@ -1,0 +1,40 @@
+#!/bin/bash
+# for remote mount only
+echo "This script is for remote automount only"
+echo "To mount local filesystems use lautom"
+read -p  "Do you wish to switch to the local automounter (y) 0r (n): " yorn
+if [[ $yorn == "y" ]]
+then
+/CIS239/extracredit/lautom $1 $2 $4
+exit
+fi
+
+if [[ $# -ne 4 ]]
+then
+echo "USAGE: $0 requires exactly 4 parameters, namely:"
+echo "magic dir, target dir, remote system ip, target path"
+echo " only include the leading / for the target path"
+echo " for example  misc pub 192.168.0.254 /var/ftp/pub"
+sleep 2
+exit
+fi
+
+magic=$1
+target=$2
+remoteip=$3
+targetpath=$4
+
+read -p "Enter rw for read/write or ro for read only rights to target dir: " rights
+read -p "Enter hard for hard mount or soft for soft mount: " hdorsft
+
+if [[ $hdorsft == "soft" ]]
+then
+interrupt="intr"
+fi
+
+
+echo "/$magic  /etc/auto.$magic   --timeout=60" >> /etc/auto.master
+
+echo "$target    -$rights,$hdorsft,$interrupt   $remoteip:$targetpath" >> /etc/auto.$magic
+
+service autofs restart 

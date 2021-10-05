@@ -1,0 +1,18 @@
+#!/bin/bash
+cont=y
+while [[ $cont = "y" ]]
+do
+read -p "Please enter one of the following...raining, foggy, snowing, clear....  " weather
+cont=n
+case $weather in
+	raining) echo "Take your embrella"
+                  cont="n";;
+	foggy)   echo "Remember to turn you car lights on"
+                  cont="n";;
+	snowing) echo "Move to Arizona"
+                  cont="n";;
+	clear)   echo "You must live in Arizona"
+                  cont="n";;
+	   *)	 echo "Enter one of the listed choices"; cont=y;;
+esac
+done

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+read -p "Enter a numeric grade for class participation: " part
+read -p "Enter a numeric grade for midterm exam: " mid
+read -p "Enter a numeric grade for final exam: " finalx
+
+((gradeavg=($part+$mid+$finalx)/3))
+
+case $gradeavg in
+  [9][0-9]|[1][0][0]) echo "Well done, you get an \"A\" for the course!" ;;
+           [8][0-9]) echo "Nice work, you get a \"B\" for the course." ;;
+           [7][0-9]) echo "Fair work, you get a \"C\" for the course." ;;
+           [6][0-9]) echo "Sub par work, you get a \"D\" for the course." ;;
+                  *) echo "Unacceptable! You get an \"F\" for the course." ;;
+esac

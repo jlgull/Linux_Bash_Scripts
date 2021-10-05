@@ -1,0 +1,85 @@
+#!/bin/bash
+echo "Here is the file that you start with"
+cat mattswitch
+sleep 5
+sort mattswitch > mattswitch1
+((i=0))
+#cat mattswitch1 | tr -s [:blank:] : | tee colmattswitch
+cat mattswitch1 | tr -s [:blank:] : > colmattswitch
+echo 
+echo
+while read text
+do
+matt[$i]=$text
+((i++))
+done < colmattswitch
+
+#cat colmattswitch | cut -d: -f1 | tee items
+cat colmattswitch | cut -d: -f1 > items
+echo 
+echo
+uniq items |tee uniqitems
+echo
+echo
+#cat colmattswitch | cut -d: -f2 | tee nums
+cat colmattswitch | cut -d: -f2 > nums
+echo 
+echo
+
+
+#uniq -c items |tee count
+uniq -c items > count
+echo
+echo
+
+#cat count | tr -s " " : | tee result
+cat count | tr -s " " : > result
+echo
+echo
+
+#cat result | cut -d: -f2 | tee usethis
+cat result | cut -d: -f2 > usethis
+echo
+echo
+
+counter=0
+while read text
+do
+for ((x=1; x <= $text; x++))
+do
+if [[ $x -eq $text ]]
+then
+#echo ${matt[$counter]} |tee temp 
+echo ${matt[$counter]} > temp 
+echo
+echo
+result=`cat temp | cut -d: -f2`
+echo "$result " >> newnums
+else 
+#echo ${matt[$counter]} |tee temp 
+echo ${matt[$counter]} > temp 
+echo
+echo
+result=`cat temp | cut -d: -f2`
+echo -n "$result " >> newnums
+fi
+((counter++))
+done
+((x=0))
+done < usethis
+
+#paste uniqitems newnums |tee final
+paste uniqitems newnums > final
+echo
+echo
+#cat final |tr [:blank:] :  | tee thisshouldwork
+cat final |tr [:blank:] :  > thisshouldwork
+echo 
+echo
+echo
+echo
+echo
+echo "Here is the file you end with"
+cat thisshouldwork
+
+rm newnums colmattswitch mattswitch1 uniqitems

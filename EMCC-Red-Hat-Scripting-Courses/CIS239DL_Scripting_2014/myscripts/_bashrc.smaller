@@ -1,0 +1,55 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias l='ls -al'
+alias vi='vim'
+alias c='clear'
+alias where='which'
+alias s='source /root/.bashrc'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Modify PATH to include myscript folder
+
+PATH=$PATH:/root/myscripts
+
+# Clear the screen prior displaying the calendar
+c
+
+# Display 3 months
+cal -3 
+
+# define dow as the Day of the week.
+dow=`date +%A`
+# define mon as the Month
+mon=`date +%B`
+# define dom as the Day of the Month
+dom=`date +%-d`
+# define yr as the current year
+yr=`date +%Y`
+
+# define the suffix of the day of the Month, based on the last digit
+if [[ $dom -eq 1 || $dom -eq 21 || $dom -eq 31 ]]
+then 
+  suffix=st
+elif [[ $dom -eq 2 || $dom -eq 22 ]]
+then 
+  suffix=nd
+elif [[ $dom -eq 3 || $dom -eq 23 ]]
+then 
+  suffix=rd
+else 
+  suffix=th
+fi
+
+
+echo
+echo "Today is $dow the $dom$suffix of $mon in year $yr."
+echo

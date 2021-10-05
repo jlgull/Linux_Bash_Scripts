@@ -1,0 +1,20 @@
+#!/bin/bash
+# demonstrate terminating a loop with break and continue
+# pint 1-4 and 6-11
+((count=0))
+while true
+do
+   ((count++))
+   if [[ $count -eq 5 ]]
+   then
+        echo "skipping count equal to 5"
+         continue
+   fi
+   if [[ $count -gt 11 ]]
+   then
+        echo "quitting because count is greater than 11"
+         break
+   fi
+ echo $count
+ 
+done 

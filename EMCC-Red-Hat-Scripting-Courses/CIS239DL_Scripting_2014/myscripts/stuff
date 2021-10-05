@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Written by Jonathan Heard for CIS239DL, Fall 2014
+#
+# Script to add users from the file: users
+
+#while read text
+#do
+#	first=`echo $text | cut -d: -f1`
+#	firstc=${first:0:1}
+#	last=`echo $text | cut -d: -f2`
+#	echo $firstc$last >> /root/removethese
+#	useradd $firstc$last
+#	passwd --stdin $firstc$last < /root/pwordfile
+#
+#done < /root/users
+
+# cat /etc/passwd
+
+# Script to delete users
+
+cat /root/removethese | while read text
+do
+	userdel -r $text
+done
+

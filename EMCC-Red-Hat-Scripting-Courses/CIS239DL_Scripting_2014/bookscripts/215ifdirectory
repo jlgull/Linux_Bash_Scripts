@@ -1,0 +1,21 @@
+#!/bin/bash
+# check to see if the present directory (pwd) is the users home directory
+# if it isn't in the home directory, then change to the home directory
+a=terrific
+echo $a
+cd /etc
+
+dir1=`pwd`
+echo "Changed to the $dir1 directory"
+if [[ $dir1 != $HOME ]]
+then
+   cd $HOME
+   echo "changing to your home directory from the $dir1 directory"
+   touch meinthemorn
+else
+   echo "you are already in your home directory, no action is required"
+fi
+
+echo 'What directory are you in now, /etc --no, /root($HOME) --no? Why?'
+
+echo "Where is the file meinthemorn?"

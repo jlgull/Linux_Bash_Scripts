@@ -1,0 +1,33 @@
+#!/bin/bash
+#Demo the expression command ((     ))  
+# We want to add a + b and divide that result by c
+#The first set of commands neglects the ((   )) command
+#The second set of commands neglects priority
+#The third set of commands satisfies the required result
+
+a=12
+b=16
+c=4
+ans=$a+$b/$c
+echo "This is the result of ans=$a+$b/$c"
+echo $ans
+
+a=12
+b=16
+c=4
+(( ans=$a+$b/$c ))
+echo "This is the result of ((ans=$a+$b/$c))"
+echo $ans
+
+a=12
+b=16
+c=4
+(( ans=($a+$b)/$c ))
+echo "This desired result is produced by ((ans=($a+$b)/$c )) because parentheses forced the addition before the division"
+echo $ans          
+
+
+#If you don't like the syntax for arithmetic expressions ((  ))  you can also use   let but I don't recommend it because it is more limited.
+echo "And here is a similar result using a different command  \"let\"  instead of ((   ))"
+let newans=($a+$b)/$c
+echo $newans

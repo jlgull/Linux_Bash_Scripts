@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for ((i=0;$i<=99;i++))
+do
+if [[ $i -gt 9 ]]
+then 
+useradd -u 6$i user6$i
+else
+useradd -u 60$i user60$i
+fi
+done

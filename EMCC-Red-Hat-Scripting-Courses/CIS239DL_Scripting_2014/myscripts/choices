@@ -1,0 +1,38 @@
+#! /bin/bash
+# This Script request choices and echos the choice
+#
+# Created by Jonathan L Heard, during CIS239DL, Fall 2014.
+#
+# Request an entry between 1 and 4
+read -p "Please enter your choice, between 1 and 4: " choice
+
+# Use case to select the choice entered.
+case $choice in
+	1)
+	# Script to copy from my home box to my USB stick
+	echo "You entered $choice."
+	;;
+	2)
+	# Script to copy from my USB stick to my home PC
+	echo "You entered $choice."
+	;;
+	3)
+	# Script to copy from my USB stick to my School PC
+	echo "You entered $choice."
+	;;
+	4)
+	# Script to copy from my School PC to my USB stick
+	echo "You entered $choice."
+	;;
+	*)
+	# Script if an invalid entry is made
+	echo 'Invalid entry was made'
+	;;
+esac
+
+
+
+exit
+
+
+

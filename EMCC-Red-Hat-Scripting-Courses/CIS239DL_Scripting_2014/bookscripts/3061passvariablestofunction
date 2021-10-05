@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function multiply
+{
+((mult=$1 * $2))
+}
+
+
+
+read -p "Enter product price: " price
+read -p "Enter product quantity: " quantity
+
+multiply $price $quantity
+
+echo "The total price is $mult"

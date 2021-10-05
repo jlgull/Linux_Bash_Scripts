@@ -1,0 +1,260 @@
+#!/bin/bash
+rm -f /root/rolls
+read -p "Please enter the number of times you want to roll three dice: " rolls
+for (( x = 1; x <= $rolls; x++ ))
+do
+RANGE=7
+echo
+number1=$RANDOM
+let "number1 %= $RANGE"    #or ((number1=number1 % $RANGE)) or ((number1 %= $RANGE))
+if [[ $number1 == 0 ]]
+then
+while [[ $number1 == 0 ]]
+do
+number1=$RANDOM
+((number1=number1 % $RANGE))
+
+#let "number1 %= $RANGE"
+done
+fi
+
+number2=$RANDOM
+((number2 %= $RANGE))
+#let "number2 %= $RANGE"
+if [[ $number2 == 0 ]]
+then
+while [[ $number2 == 0 ]]
+do 
+number2=$RANDOM
+let "number2 %=$RANGE"
+done
+fi
+
+(( num=$number1 + $number2 ))
+if [[ $num == 8 && $number1 == 4 && $number2 == 4 ]]
+then
+(( hardeight = $hardeight + 1 ))
+fi
+
+if [[ $number1 == $number2 ]]
+then
+(( doubles = $doubles + 1 )) 
+fi
+
+case $num in
+           2) (( num2 = $num2 + 1 ));;
+           3) (( num3 = $num3 + 1 ));;
+           4) (( num4 = $num4 + 1 ));;
+           5) (( num5 = $num5 + 1 ));;
+           6) (( num6 = $num6 + 1 ));;
+           7) (( num7 = $num7 + 1 ));;
+           8) (( num8 = $num8 + 1 ));;
+           9) (( num9 = $num9 + 1 ));;
+          10) (( num10 = $num10 + 1 ));;
+          11) (( num11 = $num11 + 1 ));;
+          12) (( num12 = $num12 + 1 ));;
+           *) echo "some error occurred";;
+esac
+
+echo $num >> /root/rolls
+done
+sort -n /root/rolls | uniq -c > /root/sorted_rolls
+#rm -f /root/rolls
+
+
+(( per2 = $num2 * 1000 / $rolls )) 2> /dev/null
+if [[ `echo ${#per2}` -eq 0 ]]
+then echo "2 came up 0 percent" >>/root/percent
+else
+per21=${per2:0:1}
+per22=${per2:1:1}
+per2="$per21.$per22"
+echo "2 came up $per2 percent " >>/root/percent
+fi
+
+(( per3 = $num3 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per3}` -eq 0 ]]
+then echo "3 came up 0 percent" >>/root/percent
+else
+if [[ `echo ${#per3[0]}` -lt 3 ]]
+then
+per31=${per3:0:1}
+per32=${per3:1:1}
+per3="$per31.$per32"
+echo "3 came up $per3 percent" >> /root/percent
+else
+per31=${per3:0:2}
+per32=${per3:2:1}
+per3="$per31.$per32"
+echo "3 came up $per3 percent ">> /root/percent
+fi
+fi
+
+(( per4 = $num4 * 1000 / $rolls )) 2>/dev/nulll
+if [[ `echo ${#per4}` -eq 0 ]]
+then echo "4 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per4[0]}` -lt 3 ]]
+then
+per41=${per4:0:1}
+per42=${per4:1:1}
+per4="$per41.$per42"
+echo "4 came up $per4 percent" >> /root/percent
+else
+per41=${per4:0:2}
+per42=${per4:2:1}
+per4="$per41.$per42"
+echo "4 came up $per4 percent ">> /root/percent
+fi
+fi
+
+(( per5 = $num5 * 1000 / $rolls )) 2>/dev/null
+#echo $per5
+#echo ${#per5[0]}
+if [[ `echo ${#per5}` -eq 0 ]]
+then echo "5 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per5[0]}` -lt 3 ]]
+then
+per51=${per5:0:1}
+per52=${per5:1:1}
+per5="$per51.$per52"
+echo "5 came up $per5 percent" >> /root/percent
+else
+per51=${per5:0:2}
+per52=${per5:2:1}
+per5="$per51.$per52"
+echo "5 came up $per5 percent ">> /root/percent
+fi
+fi
+
+(( per6 = $num6 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per6}` -eq 0 ]]
+then echo "6 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per6[0]}` -lt 3 ]]
+then
+per61=${per6:0:1}
+per62=${per6:1:1}
+per6="$per61.$per62"
+echo "6 came up $per6 percent" >> /root/percent
+else
+per61=${per6:0:2}
+per62=${per6:2:1}
+per6="$per61.$per62"
+echo "6 came up $per6 percent ">> /root/percent
+fi
+fi
+
+(( per7 = $num7 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per7}` -eq 0 ]]
+then echo "7 came up 0 percent" >> /root/percent
+else
+per71=${per7:0:2}
+per72=${per7:2:1}
+per7="$per71.$per72"
+echo "7 came up $per7 percent ">> /root/percent
+fi
+
+(( per8 = $num8 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per8}` -eq 0 ]]
+then echo "8 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per8[0]}` -lt 3 ]]
+then
+per81=${per8:0:1}
+per82=${per8:1:1}
+per8="$per81.$per82"
+echo "8 came up $per8 percent" >> /root/percent
+else
+per81=${per8:0:2}
+per82=${per8:2:1}
+per8="$per81.$per82"
+echo "8 came up $per8 percent " >> /root/percent
+fi
+fi
+
+(( per9 = $num9 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per9}` -eq 0 ]]
+then echo "9 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per9[0]}` -lt 3 ]]
+then
+per91=${per9:0:1}
+per92=${per9:1:1}
+per9="$per91.$per92"
+echo "9 came up $per9 percent" >> /root/percent
+else
+per91=${per9:0:2}
+per92=${per9:2:1}
+per9="$per91.$per92"
+echo "9 came up $per9 percent " >> /root/percent
+fi
+fi
+
+(( per10 = $num10 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per10}` -eq 0 ]]
+then echo "10 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per10[0]}` -lt 3 ]]
+then
+per101=${per10:0:1}
+per102=${per10:1:1}
+per10="$per101.$per102"
+echo "10 came up $per10 percent" >> /root/percent
+else
+per101=${per10:0:2}
+per102=${per10:2:1}
+per10="$per101.$per102"
+echo "10 came up $per10 percent " >> /root/percent
+fi
+fi
+
+(( per11 = $num11 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per11}` -eq 0 ]]
+then echo "11 came up 0 percent" >> /root/percent
+else
+if [[ `echo ${#per11[0]}` -lt 3 ]]
+then
+per111=${per11:0:1}
+per112=${per11:1:1}
+per11="$per111.$per112"
+echo "11 came up $per11 percent" >> /root/percent
+else
+per111=${per11:0:2}
+per112=${per11:2:1}
+per11="$per111.$per112"
+echo "11 came up $per11 percent " >> /root/percent
+fi
+fi
+
+(( per12 = $num12 * 1000 / $rolls )) 2>/dev/null
+if [[ `echo ${#per12}` -eq 0 ]]
+then echo "12 came up 0 percent" >> /root/percent
+else
+per121=${per12:0:1}
+per122=${per12:1:1}
+per12="$per121.$per122"
+echo "12 came up $per12 percent " >> /root/percent
+fi
+
+paste /root/sorted_rolls /root/percent
+(( hd8percent = $hardeight * 1000 / $rolls ))
+perhd81=${hd8percent:0:1}
+perhd82=${hd8percent:1:1}
+perhd8="$perhd81.$perhd82"
+
+(( dblpercent=$doubles * 1000 / $rolls ))
+if [[ `echo ${#dblpercent}` -lt 3 ]]
+then
+perdoub1=${dblpercent:0:1}
+perdoub2=${dblpercent:1:1}
+perdoub="$perdoub1.$perdoub2" 
+else 
+perdoub1=${dblpercent:0:2}
+perdoub2=${dblpercent:2:1}
+perdoub="$perdoub1.$perdoub2"
+fi
+echo "The number of hard eights rolled was $hardeight." " That is "$perhd8  " percent"
+echo "The number of doubles rolled was $doubles." " That is " $perdoub " percent"
+rm -f /root/percent

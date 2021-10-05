@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#sed print examples
+# 1p  sed -n 1p employees      print 1st line of employees
+# $p  sed -n '$p' employees    print last line
+# 1,5p  sed -n '1,5p' employees   print lines 1 thru 5
+# /The*/  sed -n '/Tom*/ employees    print lines with Tom followed by any character in them
+# /^T/p    sed -n '/^T/p' employees    print lines that start with T
+# /[2-9]/   sed -n '/[2-9]/' employees   print lines with 2 thru 9 in them
+# /V. /p    sed -n '/V. /' employees    print line that contain a Vfollowed by any character then a space
+
+cp 2employees employees
+
+sed -n p employees
+echo
+
+echo "sed without the -n option"
+sed p employees
+echo
+
+echo "sed showing only one line with the print command switch"
+sed -n '2p' employees
+echo
+
+echo "sed showing lines 2 thru 4 with the print command switch"
+sed -n '2,4p' employees
+echo
+
+echo "sed showing lines 2 and 4 because they begin with a 2 or a 4"
+sed -n '/^[24]/p' employees
+echo
+
+echo "sed deleting line 2 using the employee id"
+cp employees employees.old
+sed '/^2:/d' employees.old > employees
+sed -n p employees
+echo
+
+echo "using the sed substitute command to change Mike to Mark Maguire"
+cp employees employees.old
+sed 's/Mike/Mark/' employees.old > employees
+sed -n p employees
+echo
+
+echo "using the append command to append a record for Jack Horner"
+cp employees employees.old
+sed '/5:/a\
+6:Jack Horner:60000' employees.old > employees
+sed -n p employees
+echo
+
+echo "using the insert command to insert a record before record 3"
+cp employees employees.old
+sed '/3:/i\
+2:George Washington:20000' employees.old > employees
+sed -n p employees
+

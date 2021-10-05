@@ -1,0 +1,51 @@
+#! /bin/bash
+# This Script moves the myscripts dir from USB to PC
+# and back for both home and at school.
+#
+# Created by Jonathan L Heard, during CIS239DL, Fall 2014.
+
+# Use echo to diplay the 4 copy options this Script can 
+# perform.
+
+echo 'Enter 1, to copy from the home PC to the USB stick.'
+echo 'Enter 2, to copy from the USB stick to the home PC.'
+echo 'Enter 3, to copy from the USB stick to the School PC.'
+echo 'Enter 4, to copy from the School PC to the USB stick.'
+
+# Use read to obtain the option selected
+read copypick
+
+# Use case to select the option to perform
+case $copypick in
+	1)
+	# Script to copy from my home box to my USB stick
+	cp -ru /home/jlh/myscripts/* /media/jlh/LINUXUSB/myscripts
+	echo 'Copy of Scripts from Home PC to USB Stick is complete'
+	;;
+	2)
+	# Script to copy from my USB stick to my home PC
+	cp -ru /media/jlh/LINUXUSB/myscripts/* /home/jlh/myscripts
+	echo 'Copy of Scripts from USB Stick to Home PC is complete'
+	;;
+	3)
+	# Script to copy from my USB stick to my School PC
+	cp -ru /media/LINUXUSB/myscripts/* /root/myscripts
+	echo 'Copy of Scripts from USB Stick to School PC is complete'
+	;;
+	4)
+	# Script to copy from my School PC to my USB stick
+	cp -ru /root/myscripts/* /media/LINUXUSB/myscripts
+	echo 'Copy of Scripts from School PC to USB Stick is complete'
+	;;
+	*)
+	# Script if an invalid entry is made
+	echo 'Invalid entry was made'
+	;;
+esac
+
+
+
+exit
+
+
+

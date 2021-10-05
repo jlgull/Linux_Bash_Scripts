@@ -1,0 +1,24 @@
+#!/bin/bash
+# How to assign values to an array
+# You can either declare the array first like the line below
+ declare -a cars
+# and then insert the values like this
+# cars[0]=Lamborgini
+# OR you can declare the array and assign values at the same time like this
+# cars[0]=value
+cars[0]=Lamborgini
+echo ${cars[*]}
+cars=(BMWZ3 Pinto Chevette)
+echo ${cars[*]} 
+cars=(Porsche Mazerati Yugo)
+echo ${cars[*]}
+cars[6]=Mustang
+cars[4]=Metro
+cars[3]=Viper
+cars[5]=Hummer
+echo ${cars[*]}
+echo "Here is a list of all the even numbered cars in the array"
+for num in 0 2 4 6
+do
+   echo ${cars[$num]} this is car number $num
+done

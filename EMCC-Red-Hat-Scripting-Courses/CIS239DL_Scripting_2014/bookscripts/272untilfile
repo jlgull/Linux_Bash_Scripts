@@ -1,0 +1,20 @@
+#!/bin/bash
+# until the error file is deleted the timesheet program (271displayuntil)
+# will be unable to run
+# the -e option of the until statement returns true if the file exists
+#
+#logger -it test -p ftp.warn  This message will keep the script from running
+echo "The file message.err holds messages that would keep the Time Sheet Program from executing properly and therefore this file must be deleted" > /root/message.err
+echo "Checking for messages....................."
+sleep 5
+until [ ! -e /root/message.err ]
+do
+   echo "You must delete the file /root/message.err before the timesheet program will run"
+   echo "Switch to another terminal and type rm /root/message.err if you want to run the timesheet program"
+sleep 8
+done
+echo "Starting the Time Sheet Program...................."
+sleep 4
+/CIS239/bookscripts/271displayuntil
+
+

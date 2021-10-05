@@ -1,0 +1,16 @@
+#!/bin/bash
+# add two numbers and double them
+# insert positional parameters into variables for better readability and
+# understanding
+if [[ $# -lt 2 ]]
+then 
+echo "You must enter 2 positional parameters to be added, then doubled."
+sleep 2
+exit
+fi
+firstnumpassed=$1
+secondnumpassed=$2
+echo "the value of the first parameter you entered after the script name and a space is" $firstnumpassed 
+echo "the value of the second parameter you entered after the first parameter and a space is" $secondnumpassed 
+((num=2*($firstnumpassed+$secondnumpassed)))
+echo "the result of adding" $firstnumpassed "and" $secondnumpassed "then doubling that sum is" $num

@@ -1,0 +1,6 @@
+#!/bin/bash
+for ans in `ls -al /root`
+do
+echo $ans | less
+done
+

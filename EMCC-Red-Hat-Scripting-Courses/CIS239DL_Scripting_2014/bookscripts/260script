@@ -1,0 +1,20 @@
+#!/bin/bash
+#while loop to test character values
+#
+#continue="Y"
+#while [[ $continue == "Y" ]]
+#do
+#    ps -e | more   #the e option shows all processes
+#    read -p "Do you want to continue? (Y)"  con 
+#    continue=`echo $con | tr [:lower:] [:upper:]` #convert to upper case
+#done
+
+
+
+Continue="Y"
+while [[ $Continue == "Y" || $Continue == "YES" ]]
+do
+    ps -e | head   #the e option shows all processes
+    read -p "Do you want to continue? (YES) "  con 
+    Continue=`echo $con | tr [:lower:] [:upper:]` #convert to upper case
+done

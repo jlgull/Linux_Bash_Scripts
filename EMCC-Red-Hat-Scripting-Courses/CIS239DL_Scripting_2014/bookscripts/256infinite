@@ -1,0 +1,45 @@
+#!/bin/bash
+# show an infinite loop
+#show how continue and break statements work
+
+
+#while [[ 1 -eq 1 ]] 
+#do 
+#((counter = counter + 1))
+#echo $counter
+#done
+
+# while true
+# do
+# echo $?
+# echo "still going"
+# done
+
+#while ! false
+#do
+#echo "The ! false test condition gives an exit status of"  $?
+#echo "to stop hit ctrl+c"
+#sleep .7
+#done
+
+
+#while [[ 1 -eq 1 ]] 
+#do 
+#((counter = $counter + 1))
+##((rem=$counter%2))
+#if [[ $rem -eq 0 ]]
+#then 
+#continue
+#fi
+#if [[ $counter -ge 200 ]]
+#then 
+#break
+#fi 
+#echo $counter
+#done
+
+while true 
+do 
+echo "result was true"
+done
+

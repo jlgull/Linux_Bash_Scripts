@@ -1,0 +1,15 @@
+switch1		191.168.0.0
+switch1		192.150.0.0
+switch1		193.0.0.0
+switch2		191.100.0.0
+switch3		191.200.0.0
+switch3		194.39.29.0
+switch4		15.211.98.03
+switch4		33.33.33.33
+switch4		44.44.44.44			
+switch5		194.33.44.55
+switch5		195.168.0.254
+switch7		12.12.12.12
+switch7		121.212.121.212
+switch9		0.0.0.0
+switch9 	1.1.1.1

@@ -1,0 +1,12 @@
+#!/bin/bash
+# script to accept two parameters one a file name and one a number, display the # parameter values entered for both parameters, set those parameters equal to 
+# variables named file and filesuffix
+file=$1
+filesuffix=$2
+echo "This is the original text which will be placed into $file and copied to $file$filesuffix.txt" > $file 
+echo "The contents in $file that will be copied to $file$filesuffix.txt is"
+cat $file
+cp $file file$filesuffix.txt
+echo $file "was successfully copied to $file$filesuffix.txt and here are the contents"
+cat file$filesuffix.txt
+exit

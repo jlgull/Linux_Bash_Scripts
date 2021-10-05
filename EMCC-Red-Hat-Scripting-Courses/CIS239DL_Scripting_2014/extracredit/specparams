@@ -1,0 +1,31 @@
+#!/bin/bash
+# script to display values of special parameters with a usage clause
+# script sums the first 2 parameters, gets the product of the next 2
+# parameters and then adds both results
+# un-comment the line beginning with the word set to turn debugging on
+# if you un-comment the next line then un-comment the last line of the
+# script that begins with the word set
+# set -xv
+if [ $# != 4 ]
+then
+   echo "To use $0 you must enter 4 integers separated by spaces"
+   sleep 4
+   exit
+fi
+echo $0 "is the name of the script"
+echo $@ "values of all pos params entered after script name"
+echo $# "number of pos params entered after script name"
+echo $? "exit status of the last command, in this case it is echo"
+echo $$ "PID of shell"
+
+num1=$1
+num2=$2
+num3=$3
+num4=$4
+((sum=$num1+$num2))
+echo "when you add $num1 and $num2 you get $sum"
+((product=$3*$4))
+echo "when you multiply $num3 by $num4 you get $product"
+((total=sum+product))
+echo "when you add the sum""("$sum")" "of" '$1'"("$num1")" "and" '$2'"("$num2")" "to the product""("$product")" "of" '$3'"("$num3")" "and" '$4'"("$num4")" "you get $total"
+# set +xv

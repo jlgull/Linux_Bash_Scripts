@@ -1,0 +1,9 @@
+#!/bin/bash
+read -p "First Name :" first
+read -p "Last Name :" last
+read -p "Social Security :" socsec
+one=${first:0:2}
+two=${last:0:3}
+three=${socsec:5:4}
+password=$one$two$three
+echo $password

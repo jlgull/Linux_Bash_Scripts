@@ -1,0 +1,3 @@
+root     tty1         Nov  7 19:22
+root     pts/0        Nov  7 19:23 (:0.0)
+root     pts/1        Nov  7 19:25 (:0.0)

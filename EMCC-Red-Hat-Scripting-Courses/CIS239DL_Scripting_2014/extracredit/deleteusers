@@ -1,0 +1,7 @@
+#!/bin/bash
+cd /home
+ls | grep -v "mike" | grep -v "lost+found" > /root/remove
+while read name
+do
+userdel -r $name
+done < /root/remove

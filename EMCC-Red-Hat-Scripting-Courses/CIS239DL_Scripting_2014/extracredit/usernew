@@ -1,0 +1,54 @@
+#!/bin/bash
+clear
+mkdir -p /home/temp
+echo "Here is a list of your present temp users and passwords."
+cat /root/users_passwords 2> /dev/null
+if [[ $? -eq 1 ]]
+then
+echo "You do not have any temp users."
+else
+read -p "Do you want to remove existing temp users? If so, enter y. " yorn
+fi
+if [[ $yorn == "y" ]]
+then
+/CIS239/extracredit/usergone
+fi
+read -p "Do you want to add any new users? If so, enter y. " yesorno
+   if [[ ! $yesorno == "y" ]]
+     then
+       exit
+   fi
+rm -fr /root/newusers
+loop=0
+while [[ $loop -eq 0 ]]
+do
+   read -p "Enter username: " username
+   /CIS239/extracredit/1setpassword $username
+   comment=`cat /root/gecos |cut -d: -f1,2 | tr : " "`
+   useradd $username -c "$comment" -d /home/temp/$username
+   passwd --stdin $username < /root/pwordfile 2>errfile.txt
+   password=`cat /root/pwordfile`
+   echo "$username:$password" >> /root/users_passwords 
+   echo "User $username has been added"
+   read -p "Do you wish to add another user (y or n): " con
+   chage -d 0  $username
+echo "Please obey all the nuclear rules" > /home/temp/$username/message
+if [[ $con == y ]]
+then
+loop=0
+else 
+loop=1
+fi
+done
+#cat /root/usersadded
+echo
+echo "Here are the temp users and their original passwords."
+cat /root/users_passwords
+for name in `cut -d: -f1 /root/users_passwords`
+do
+cat /etc/passwd | grep -w "$name" >> /root/newusers
+done
+echo
+echo "Here is the temp users info from /etc/passwd."
+cat /root/newusers
+echo

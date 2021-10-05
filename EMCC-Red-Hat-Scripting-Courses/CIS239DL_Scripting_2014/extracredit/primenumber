@@ -1,0 +1,21 @@
+#!/bin/bash
+check=0
+read -p "Enter a number to test if it is prime: " number
+if [[ $number%2 -eq 0 ]]
+then
+echo "$number is not prime because it is an even number"
+fi
+for ((x = 2; x < (($number/2)); x++))
+do
+((r = $number%$x))
+if [[ $r == 0 ]]
+then
+echo "$number is not prime, it is evenly divisible by $x"
+check=1
+fi
+done
+if [[ $check = 0 ]]
+then
+echo "$number is a prime number"
+fi
+

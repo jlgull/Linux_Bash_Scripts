@@ -1,0 +1,15 @@
+#!/bin/bash
+# Until loop that determines if a host is available
+read -p "Enter IP or host name to ping: " PingName
+ping -c 2 $PingName
+until [[ $? -eq 0 ]]
+do
+   sleep 2
+   echo "Host not available.  Pinging again......."
+   ping -c 3 $PingName
+done
+echo "The host is available."
+echo "Telnetting to the host."
+telnet $PingName
+
+

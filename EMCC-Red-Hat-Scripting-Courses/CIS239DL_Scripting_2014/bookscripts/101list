@@ -1,0 +1,22 @@
+#!/bin/bash
+#Demo the list Group commands  (   )   and {    }
+
+
+x=4
+y=5
+( x=8 )           # subshell
+( y=9 )
+( ((z=$x*$y)); echo $z; )
+echo $x
+echo $y
+echo $z
+
+
+x=4 
+y=5
+{ x=8; y=10 ; (( q=$x*$y )); echo $x $y $z $q; }      #same shell
+echo $x
+echo $y
+echo $z $q
+echo $q
+

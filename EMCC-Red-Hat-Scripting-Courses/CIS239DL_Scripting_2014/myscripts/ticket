@@ -1,0 +1,37 @@
+#! /bin/bash
+# Script to request age and return ticket price
+# Written by Jonathan L. Heard for CIS239DL, Fall 2014
+# Clear screen prior to data request
+clear
+
+# Use the Read command to get the age of the ticket requester
+read -p "Enter your age to get your ticket price: " age
+
+# Use the Case command to arrive at the cost
+case $age in
+	[1-9]|[1][0-2])
+	ticket=5
+	;;
+	[1][3-9])
+	ticket=50
+	;;
+	[2-3][0-9]|[4][0-5])
+	ticket=7
+	;;
+	[4][6-9]|[5-9][0-9])
+	ticket=3
+	;;
+	*)
+	ticket=0
+	;;
+esac
+
+# Test Ticket for value > 0
+if [ $ticket -gt 0 ]
+then
+	echo "Ticket price is \$$ticket"
+else
+	echo "Enter your real age, between 1 and 99!!"
+fi
+
+exit

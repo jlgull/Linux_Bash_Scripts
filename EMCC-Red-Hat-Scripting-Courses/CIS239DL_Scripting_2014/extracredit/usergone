@@ -1,0 +1,9 @@
+#!/bin/bash
+cut -d: -f1 /root/users_passwords > /root/tempusers
+while read text
+do
+userdel -r $text
+done < /root/tempusers
+rm /root/tempusers
+echo -n > /root/users_password
+rm -fr /root/users_passwords

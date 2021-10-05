@@ -1,0 +1,13 @@
+#!/bin/bash
+
+a=$1
+
+if [[ $a == "apple" ]]
+then
+echo "My favorite pie is $a"
+elif [[ $a == "Apple" ]]
+then
+echo "My favorite pie is $a"
+else
+  echo "You did not enter apple or Apple!"
+fi

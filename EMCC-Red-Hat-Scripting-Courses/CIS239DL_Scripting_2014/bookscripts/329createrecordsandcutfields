@@ -1,0 +1,17 @@
+#!/bin/bash
+#Create an array and populate with records. Cut fields of the records into 
+#variables. Use the variables to create records formatted differently than 
+#the original records in the array.
+
+employ=(100:cheryl:IT:300 101:randol:IC:70000 102:thomas:LT:11000 103:dustin:LT:40000 )
+max=${#employ[*]}
+echo "MAX is equal to $max"
+echo " NAME            DEPT     SALARY    EMPLOYEE ID" 
+for (( num=0; num < $max; num++ ))
+do
+empid=$(echo ${employ[$num]} | cut -d: -f1)
+name=$(echo ${employ[$num]} | cut -d: -f2)
+sal=$(echo ${employ[$num]} | cut -d: -f4)
+dept=$(echo ${employ[$num]} | cut -d: -f3)
+echo -e "$name" '\t' '\t' "$dept" '\t' "$sal" '\t' '\t' "$empid" 
+done

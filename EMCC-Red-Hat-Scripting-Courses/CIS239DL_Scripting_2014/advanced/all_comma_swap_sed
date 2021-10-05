@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -e 's/ MA/, Massachusetts/' -e 's/ PA/, Pennsylvania/' -e 's/ OK/, Oklahoma/' -e 's/ VA/, Virginia/' -e 's/ CA/, California/' list

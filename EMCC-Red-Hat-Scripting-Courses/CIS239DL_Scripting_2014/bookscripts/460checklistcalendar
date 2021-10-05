@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dialog --checklist "Checklist" 10 30 5 1 "Display Message" on 2 "Display File" off 3 "Display Calendar" off 2>/root/checkmenu.$$
+
+
+grep 1 /root/checkmenu.$$ >/dev/null
+
+if [[ $? -eq 0 ]]
+then
+   dialog --backtitle "Message Box" --msgbox "Hello" 5 10
+fi
+grep 2 /root/checkmenu.$$ > /dev/null
+
+if [[ $? -eq 0 ]]
+then
+    dialog --backtitle "Text Box" --textbox /root/bin/rha_add_student 30 70   
+fi
+
+grep 3 /root/checkmenu.$$ >/dev/null
+
+if [[ $? -eq 0 ]]
+then
+  dialog --backtitle "calendar" --calendar "Current Month" 5 30
+fi
+
+rm  /root/checkmenu.$$
+clear

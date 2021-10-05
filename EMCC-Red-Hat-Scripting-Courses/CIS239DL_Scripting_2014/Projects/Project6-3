@@ -1,0 +1,15 @@
+#!/bin/bash
+
+read -p "Enter Status: " status
+
+if [[ $status == "S" || $status == "H" ]]
+then
+   ((bonus=500))
+   echo "You get a bonus of" '$'$bonus
+
+   elif [[ $status == "C" ]]
+   then
+      echo "You are a contractor. You need to be permanent to get a bonus."
+else
+  echo "Invalid status entered"
+fi

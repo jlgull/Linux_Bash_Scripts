@@ -1,0 +1,11 @@
+#!/bin/bash
+# mike's script
+if [ $# != 5 ]
+then
+echo "You must enter 5 munbers, no more no less!"
+exit
+fi
+echo $1 $2 $3 $4 $5
+(( sum=$1+$2+$3+$4+$5 ))
+(( average=$sum/$# ))
+echo "average is: " $average

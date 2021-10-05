@@ -1,0 +1,28 @@
+
+#!/bin/bash
+# demonstrate the use of setting a global variable
+#
+read -p "Enter total in account; " x
+function function1
+{
+   read -p "Enter withdraw amount: " with
+((x=$x-$with))
+   echo "x's value within function1: " $x
+echo "You now have $x in your account after this withdraw."
+}
+
+
+function function2
+{
+   read -p "Enter a deposit amount: " dep
+((x=$x+$dep))
+   echo "x's value within function2: " $x
+echo "You now have $x in your account after this deposit."
+}
+
+
+echo "x's value outside function1 before function1 is called: " $x
+function1
+echo "x's value outside function1 after function1 is called and before function2: " $x
+function2
+echo "x's value outside function2 after function2 is called: " $x

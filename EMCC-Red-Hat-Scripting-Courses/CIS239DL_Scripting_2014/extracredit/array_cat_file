@@ -1,0 +1,5 @@
+#!/bin/bash
+
+declare -a barray
+barray=( `cat /CIS239/Projects/arrayfile` )
+echo ${barray[@]}

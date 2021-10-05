@@ -1,0 +1,29 @@
+#!/bin/bash
+#Show how to do this with a function 
+#Function is in /root/LibFunB as funcheck_numeric
+
+num=y
+
+read -p "Enter a number: " ans
+len=`echo ${#ans}`
+
+for ((i=0;i<$len;i++))
+do
+   val=`echo ${ans:i:1}`
+   echo $val | grep ^[0-9] > /dev/null
+   retval=$?
+
+   if [[ $retval -eq 1 ]]
+   then
+     num=n
+     break
+   fi
+done
+
+if [[ `echo $ans | tr [[:lower:]] [[:upper:]]` == Y ]]
+then
+   echo "Value is numeric"
+else
+   echo "Value is not numeric"
+fi
+

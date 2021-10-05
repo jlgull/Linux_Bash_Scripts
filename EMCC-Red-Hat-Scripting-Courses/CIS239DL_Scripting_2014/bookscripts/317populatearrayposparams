@@ -1,0 +1,25 @@
+#!/bin/bash
+# How to populate and add an array using positional paramenters and provide user 
+# direction with a usage clause
+
+if [[ $# < 5 ]]
+then
+    echo "Please input 5 elements separated by a space after the script name to populate an array. Thank you."
+sleep 3
+exit
+fi
+
+
+ar=($1 $2 $3 $4 $5)
+echo ${ar[*]}
+
+echo "First array element value is ${ar[0]}"
+echo "Second array element value is ${ar[1]}"
+echo "Third array element value is ${ar[2]}"
+echo "Fourth array element value is ${ar[3]}"
+echo "Fifth array element value is ${ar[4]}"
+
+(( sum = ${ar[0]} + ${ar[1]} + ${ar[2]} + ${ar[3]} + ${ar[4]} ))
+
+echo "The sum of the five elements is $sum "
+

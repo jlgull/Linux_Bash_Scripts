@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep '!!' /etc/shadow | cut -d: -f1 > nopasswd.txt

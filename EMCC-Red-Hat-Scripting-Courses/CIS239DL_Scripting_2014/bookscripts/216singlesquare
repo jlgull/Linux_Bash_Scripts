@@ -1,0 +1,37 @@
+#!/bin/bash
+
+read -p "Continue? (y or n): " yorn
+
+if [[ $yorn == "y" ]]; then
+echo "double brackets and double equal signs"
+fi
+
+if [ $yorn == "y" ]; then
+echo "single brackets double equal signs"
+fi
+
+if [[ $yorn = "y" ]]; then
+echo "double brackets single equal"
+fi
+
+if [ $yorn = "y" ]; then
+echo "single brackets single equal"
+fi
+
+if [ $yorn = y ]; then
+echo "single brackets single equal no double quotes"
+fi
+
+
+if test $yorn == "y"
+then
+echo "test double equal"
+fi
+
+if test $yorn = "y"; then
+echo "test single equal"
+fi
+
+if test $yorn = y; then
+echo "test single no double quotes"
+fi

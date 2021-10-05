@@ -1,0 +1,35 @@
+
+#!/bin/bash
+#source /root/.bash_profile
+mkdir -p /backup/archive                       #force the creation of /backup/archive
+#mv -i /test_bu/* /backup/archive               #
+for ((i=1;i<3;i++))
+do
+   touch /root/test_bu/*.dat
+sleep 60
+   when=`date`
+   mkdir -p /backup/archive/"$i"bu"$when"
+   find /root/test_bu -amin 1 >> /root/captured
+     while read text
+     do
+        cp -f $text /backup/archive/"$i"bu"$when" 2>/dev/null
+     done < /root/captured
+   rm /root/captured
+done
+((num=i-1)) 
+echo "All $num data files were successfull backed up!"
+ls
+find /backup/archive -type d >> /root/captured
+
+while read text
+do
+((counter++))
+echo $counter
+done < /root/captured
+
+rm -f /root/captured
+
+echo ${temp1[*]}
+
+cd /backup/archive
+ls

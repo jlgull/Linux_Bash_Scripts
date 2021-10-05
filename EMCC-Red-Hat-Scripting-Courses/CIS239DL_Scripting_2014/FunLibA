@@ -1,0 +1,206 @@
+function c ()
+{
+clear
+}
+
+function eth0 ()                   #just type eth0 to get eht0 nic card info
+{
+cd /etc/sysconfig/network-scripts
+vi ifcfg-eth0
+}
+
+
+
+function cutforce: ()    #input a file, file will be forced to be : delimited, then input up to 3 : delimited fields
+{
+if [[ $# < 2 ]]
+then
+echo "USAGE: Enter the absolute path to the file you want to make : delimited."
+echo "Enter up to three fields you want to cut from the file."
+echo "The results will be stored in ~/cutishere"
+
+fi
+cat $1 | grep -v "^#" | tr -s " " : | cut -d: -f$2,$3,$4 > ~/cutishere | 2> /dev/null; cat ~/cutishere  
+echo "Your results have also been saved in ~/cutishere"
+}
+
+function vil ()    #open the last file you opened in vi or listed; the up arrow is probably just as good
+{
+vi $_
+}
+
+function run ()  # accepts a service name and attempts to start it
+{
+if [[ $# < 1 ]]
+then
+echo "USAGE: start [daemon] to start service"
+service $1 start
+fi
+}
+
+function stat ()   #input a service and the status will be returned
+{
+if [[ $# < 1 ]]
+then
+echo "USAGE: stat [daemom] to get status of the service"
+fi
+service $1 status
+}
+
+function crank ()  # input a service and have it restart
+{
+if [[ $# < 1 ]]
+then
+echo "USAGE: crank [daemom] to restart the service"
+fi
+service $1 restart
+}
+
+
+function halt ()      #input a service to stop
+{
+if [[ $# < 1 ]]
+then
+echo "USAGE: stop [daemom] to stop the service"
+fi
+service $1 stop
+}
+
+
+function deluser ()    #input a username to delete all of their files; do not confuse with userdel
+{
+userdel -r $1
+}
+
+function deluserbut ()
+{
+ls /home/ | egrep -v '$*|lost+found|root|mike'  > /root/userdel
+while read text
+do
+userdel -r $text
+done < /root/userdel
+}
+
+function fun
+{
+vi /root/FunLibA
+}
+
+function b
+{
+cd -
+}
+
+function lsd ()
+{
+if [[ $1 == "" ]]
+then
+dir=`echo $PWD`
+else
+dir=$1
+fi
+ls -al $dir | egrep '^d' |grep -v '\.'
+}
+
+function cls
+{
+cd $1
+ls
+}
+
+function cla
+{
+
+cd $1
+ls -al
+}
+
+function eth1
+{
+vi /etc/sysconfig/network-scripts/ifcfg-eth1
+}
+
+
+function need
+{
+#!/bin/bash
+# list all the .conf files but wont list all the other BS.
+#updatedb
+ls -R /  |grep -wv share | grep -wv log | grep -wv var | grep $1 > /root/temp
+ls -R /root/temp | grep *$1.conf$  >> /root/located
+#ls -R /root/located | grep *d
+sort /root/located > /root/temporary
+uniq /root/temporary > /root/located
+
+while read text
+do
+locate /*/$text >> /root/found
+done < /root/located
+sort /root/found > /root/temp
+uniq /root/temp > /root/uniq
+cat /root/uniq
+rm -fr /root/located
+rm -fr /root/found
+rm -fr /root/temp
+rm -fr /root/uniq
+rm -fr /root/found
+}
+
+
+cutany()
+{
+#set -xv
+rm -f /root/directories
+rm -f /root/links
+rm -f /root/files
+rm -f /root/undetermined
+ls /root > translated
+while read text
+do
+if [[ -d $text ]]; then
+  echo "$text" >> /root/directories
+elif [[ -f $text ]]; then
+  echo "$text" >> /root/files
+elif [[ -h $text ]]; then
+  echo "$text" >> /root/links
+else
+  echo "$text" >> /root/undetermined
+fi
+done < translated 
+echo "DIRECTORIES"
+cat /root/directories  2>/dev/null
+echo "LINKS"
+cat /root/links  2>/dev/null
+echo "FILES"
+cat /root/files  2>/dev/null
+echo "UNDETERMINED"
+cat /root/undetermined 2>/dev/null
+#set +xv
+}
+
+function vis ()
+{
+echo '#!/bin/bash' > $1
+vi $1
+}
+
+
+
+function prime ()
+{
+check=0
+read -p "Enter a number to test if it is prime: " number
+for ((x = 2; x < (($number/2)); x++))
+do
+((r = $number%$x))
+if [[ $r == 0 ]]
+then
+echo "$number is not prime, it is evenly divisible by $x"
+check=1
+fi
+done
+if [[ $check = 0 ]]
+then
+echo "$number is a prime number"
+fi
+}

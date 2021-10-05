@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]
+then
+echo "USAGE: need a single file as a parameter"
+sleep 2
+exit
+fi
+
+file=$1
+/CIS239/Projects/readarray $file
+
+echo ${array[*]}

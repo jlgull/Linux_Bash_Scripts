@@ -1,0 +1,7 @@
+#!/bin/bash
+
+case $(pwd) in
+  /) echo "you are in the root" ;;
+ $HOME) echo "you are in home" ;;
+ *) echo "not in root or home" ;;
+esac

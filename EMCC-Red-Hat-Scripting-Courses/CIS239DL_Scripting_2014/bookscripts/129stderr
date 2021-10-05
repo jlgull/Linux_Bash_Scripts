@@ -1,0 +1,21 @@
+#!/bin/bash
+
+( who; rm tz5 ) > wholist.txt 2> errlist.txt
+
+echo "Here are the contents of the wholist.txt file"
+cat wholist.txt
+sleep 3
+echo
+
+echo "Here are the contents of the errlist.txt file"
+cat errlist.txt
+sleep 3
+echo
+
+
+( who; rm tz5 ) &> comboerrlist.txt
+
+echo "Here are the contents of the comboerrlist.txt file"
+cat comboerrlist.txt
+sleep 3
+

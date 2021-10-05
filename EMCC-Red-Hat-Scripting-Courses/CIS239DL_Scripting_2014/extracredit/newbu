@@ -1,0 +1,17 @@
+
+#!/bin/bash
+mkdir -p /backup/archive
+for ((i=1;i<3;i++))
+do
+   touch /root/test_bu/*.dat
+   mkdir -p /backup/"$i"bu"$(date)"
+   cd /root
+   find test_bu -amin 1 >> captured
+     while read text
+     do
+        cp -f $text /backup/"$i"bu"$(date)" 2>/dev/null
+     done < captured
+   rm captured
+done
+cd /backup
+ls 

@@ -1,0 +1,15 @@
+Write a program that will accomodate this criteria:
+
+All Saturday flights are $50 to anywhere
+Flights to LA are $60 everyday but Sat
+Flights to SF are $70 everday but Sat
+Flights to AB are $80 everyday but Sat
+
+Display flight destination, day of departure, and cost of flight
+
+Name the script flight_sat
+
+
+Now make all flights on Wednesday $66
+
+name the scrit flight_sat_wed

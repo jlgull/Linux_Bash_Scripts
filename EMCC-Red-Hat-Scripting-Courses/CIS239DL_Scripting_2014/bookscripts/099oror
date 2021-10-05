@@ -1,0 +1,5 @@
+#!/bin/bash
+#Demo the ||operator
+#If first commands fails then perform the subsequent command.
+
+cp etc/profile /etc/profile.bak || echo 'Trouble, there is no /etc/profile to backup' > /var/log/messages; head -5 /var/log/messages 

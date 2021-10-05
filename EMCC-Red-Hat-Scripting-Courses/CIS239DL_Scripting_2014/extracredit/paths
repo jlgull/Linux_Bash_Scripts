@@ -1,0 +1,3 @@
+$!/bin/bash
+
+PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin:/root/bin:/root/CIS239/extracredit:/root/CIS239/extracredit:/CIS239/bookscripts:/CIS239/extracredit

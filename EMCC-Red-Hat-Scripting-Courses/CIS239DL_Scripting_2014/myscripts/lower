@@ -1,0 +1,19 @@
+#! /bin/bash
+# Jonathan Heard for CIS239DL Fall 2014
+# Sat Oct 11 14:51:57 MST 2014
+# script to change any upper case file names to lower case
+# in the same folder, using if and lists
+#
+cnt=0
+
+for ZZ in `ls`
+
+do
+  zz=`echo $ZZ | tr [:upper:] [:lower:]`
+  echo $ZZ $zz
+
+  ((cnt++))
+  mv $ZZ /home/jlh/myscripts/fall_2009/$zz
+done
+echo "Files listed: $cnt"
+

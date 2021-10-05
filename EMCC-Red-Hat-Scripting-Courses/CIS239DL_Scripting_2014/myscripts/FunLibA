@@ -1,0 +1,85 @@
+function em1 ()  # just type em1 to get em1 nic card info
+{
+  cd /etc/sysconfig/network-scripts
+  vi ifcfg-em1
+}
+
+
+#Create New Script from function
+function vis ()
+{
+if [[ $# -lt 1 ]]
+then
+	echo "vis function requires the file name being created"
+else
+
+# Use touch to creat the new Script space
+touch $1
+
+# Use chmod to make the new script executable
+chmod a+x $1
+
+# Create the header for the new script
+echo '#! /bin/bash' >> $1
+echo '# Jonathan Heard for CIS239DL Fall 2014' >> $1
+echo -n '# ' >> $1
+date >> $1
+
+# Open the new Sript for editing 
+vi $1
+fi
+}
+
+# Create a Content Function
+function content ()
+{
+#for names in $( ls $1 )
+#do 
+#  echo $names
+#done
+
+# Capture the current directory for where to place files
+home=`pwd`"/"
+#echo $home $pwd2 ; sleep 5
+cd $1
+#ls $1 > /root/captured 
+ls $1 > $home"captured" 
+while read text
+do 
+ if [[ -d $text ]]
+  then
+	echo "$text" >> $home"dirs"
+  elif [[ -h $text ]]
+  then
+	echo "$text" >> $home"links"
+  elif [[ -f $text ]]
+  then
+	echo "$text" >> $home"files"
+  else
+  	echo "$text" >> $home"unknown"
+  fi
+
+done < $home"captured"
+
+# echo all the results to the display
+clear
+echo "Content listing for folder $1"
+echo
+echo "----Directories----"
+cat $home"dirs" 2>/dev/null
+echo "----Links----"
+cat $home"links" 2>/dev/null
+echo "----Files----"
+cat $home"files" 2>/dev/null
+echo "----Everything Else----"
+cat $home"unknown" 2>/dev/null
+
+
+rm -f $home"captured"
+rm -f $home"dirs"
+rm -f $home"links"
+rm -f $home"files"
+rm -f $home"unknown"
+
+cd "$home"
+}

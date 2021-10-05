@@ -1,0 +1,10 @@
+#!/bin/bash
+
+((x=y-5))
+y=11
+if [[ $x -gt $y ]]
+then
+echo $x is greater than $y
+else
+echo $y is greater than $x
+fi

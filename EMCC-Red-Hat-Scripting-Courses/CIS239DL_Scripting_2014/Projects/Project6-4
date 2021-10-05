@@ -1,0 +1,21 @@
+#!/bin/bash
+grade1=$1
+grade2=$2
+grade3=$3
+
+ #read -p "Enter grade #1: " grade1
+#read -p "Enter grade #2: " grade2
+#read -p "Enter grade #3: " grade3
+((gradeavg=($grade1 + $grade2 + $grade3) / $#))
+if [[ $gradeavg -gt 100 ]]
+then
+echo "You got an A"
+exit 
+fi
+case $gradeavg in
+[9][0-9]|[1][0][0]) echo "You got an A, congratulations!";;
+[8][0-9]) echo "You got a B, good job.";;
+[7][0-9]) echo "You got a C, about average";;
+[6][5-9]) echo "You got a D, you must try harder";;
+*) echo "You got an F and will have to repeat the course.";;
+esac

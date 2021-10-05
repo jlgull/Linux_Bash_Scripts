@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source /root/LibFunB
+
+read -p "Enter a number: " ans
+
+echo "Entering function with this value....$ans"
+
+
+if funcheck_numeric $ans
+then
+echo "Continuing because entry is a number"
+else
+echo "Quitting because entry is not a number"
+fi
+
+if funcheck_range $ans
+then
+ echo "Continuing because entry is within range."
+else
+ echo "Quitting because entry is out of range."
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Here is the file to move each word to its own line."
+cat $1
+
+cat $1 | tr " " '\n' >resultfile
+
+echo "Here is the file with one word per line."
+cat resultfile

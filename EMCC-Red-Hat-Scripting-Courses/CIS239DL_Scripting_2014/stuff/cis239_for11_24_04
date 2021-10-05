@@ -1,0 +1,21 @@
+LAB FOR CIS239DL FOR WEDNESDAY NOVEMBER 24, 2004
+
+
+1) Do Project 5-8 on page 200. At the bottom of page 200 it may appear that they want you to set the positional parameters equal to ($1=name, $2=address etc) inside the script, but they don’t. If they wanted you to assign a value inside the script it would be formatted like this (name=$1), which they do. They want you to know that there will be 7 positional parameters and what information you should enter when you call the script. It will be: bash Project5-8 name address city etc, but you will be substituting their values for the names. 
+  Make the city variable readonly. Add a line to the script after making the city variable readonly that will attempt to change the value of the variable for city, eg city=”phoenix” and see what happens. Try it with some other variables.
+
+2) Do scripts on page 219 and 221 to get a feel for using logical
+operators. You have already have had some experience with  the NOT (!) operator. Just understand the script on page 223 that uses the (!)  by testing [[ ! $Years –lt 25 ]] could return the same pass values by negating to parts of the test, namely remove the (!) and change –lt to –ge. Negating two parts of the condition will ask the same question. Not less than 25 is identical to saying greater than or equal to 25.
+
+3) Do script on page 226 to get an understanding of how an elif
+statement further tests a false condition. Up until now we either did nothing for false conditions or we had a default for all conditions that were not true and we captured them with an else statement. The script on 226 will show you that you can further explore the results that failed the initial condition. You can use as many elif’s as you want to dig deeper into false conditions.
+4) Read nesting if statements on pages 228-231 and look over the script named page231exercise located in /root and run it a few times. It is the algorithm for the flowchart on page 231. I have added a usage clause that operates using pattern matching. Discuss this among yourselves and write down any questions you would like answered in the next class period.
+Do Project6-7 on page 248-249.
+
+
+5) Read about case statements.
+     Do Project 6-4 on page 247.
+When it says to read in three grades it means three number grades between 0 and 100. Use a case statement instead of an if/elif/else/fi statement. 
+      
+6) If there is any time left, create a simple script as root and give no permissions to other, eg chmod 760 myscript. Create another script (.wrapmyscript) that accepts a suppressed password from the keyboard checks that password to make sure it is redhat. Note the (.) before wrapmyscript. The (.) makes the file hidden. If the password is correct, then change the permissions for (other) on myscript to only executable. Make a call to my script, eg bash myscript and then change the permissions for (other) back to none. If the password is incorrect then display “Wrong password. Access denied!” 
+ 

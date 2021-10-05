@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ `date +%a` == "Fri" ]]
+then
+echo "Today is Friday"
+else
+echo "Today is not Friday"
+fi

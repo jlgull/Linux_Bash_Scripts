@@ -1,0 +1,19 @@
+#! /bin/bash
+# Jonathan Heard for CIS239DL Fall 2014
+# Tue Oct  7 19:43:30 MST 2014
+#
+# Locate an empty color array entry
+
+colors=(red blue green yellow purple brown black white gray orange)
+colors[3]=""
+# test for zero lenght element
+for (( ctr=0; ctr<`echo ${#colors[*]}`;ctr++ ))
+do
+  #echo ${colors[ctr]}
+  if [[ `echo ${#colors[ctr]}` -eq 0 ]]
+  then
+  #echo $ctr
+    (( empty=$ctr+1 )) 
+    echo "Element $empty is empty"
+  fi
+done

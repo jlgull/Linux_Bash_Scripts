@@ -1,0 +1,26 @@
+#!/bin/bash
+#demo logical OR ( || )
+
+set -xv 
+
+read -p "years of service: " yos
+read -p "age: " age
+
+if [[ $yos -ge 30 || $age -ge 65 ]]
+then
+echo "Congrats you are eligible for retirement!"
+else
+echo  "Keep working, keep working keep working!"
+fi
+
+read -p "years of service: " yos
+read -p "age: " age
+
+if [[ $yos > 30 || $age > 65 ]]    # change to > 64 to remove error
+then
+echo "Congrats you are eligible for retirement!"
+else
+echo  "Keep working, keep working keep working!"
+fi
+
+set +xv

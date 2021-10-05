@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source /root/LibFunB
+
+read -p "Enter a string: " str
+
+echo "Entering function with this value....$str"
+
+
+if funcheck_alpha $str
+then
+echo "Continuing because entry is aalphabetic"
+else
+echo "Quitting because entry is not alphabetic"
+fi

@@ -1,0 +1,18 @@
+#!/bin/bash
+#Demo using the ; | && and || commands in combination
+#set -xv
+
+#date > /root/date ; cat /root/date && cut -d" " -f1 root/date > /root/day || rm -f /root/day  && echo "cut command succeeded" || echo "cut command failed" && cat /root/day || echo '/root/day does not exist'; who
+
+#date > /root/date ; cat /root/date && cut -d" " -f1 /root/date > /root/day && echo "cut command succeeded"|| echo "Cut command failed"  && rm -f /root/day && cat /root/day || echo '/root/day does not exist'; who 
+
+#set +xv
+
+
+#Simple example
+rm /root/not_there && echo "Not_there removed" || echo "not_there doesn't exist"
+
+
+#Remove the / before /root/date to force an error
+
+#date > /root/date; cat /root/date && cut -d" " -f1 root/date > /root/day && echo "cut command succeeded" && cat /root/day || echo "cut command failed" ; who

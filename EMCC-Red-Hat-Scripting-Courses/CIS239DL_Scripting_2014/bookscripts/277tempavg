@@ -1,0 +1,12 @@
+#!/bin/bash
+# use a for statement to collect exactly 7 temperature entries and then
+# calculate the running week average temperature 
+#
+for num in 1 2 3 4 5 6 7
+do
+   read -p "Enter daily temperature for day $num: " temp
+   ((temptotal = $temptotal + $temp))
+done
+echo $num
+((avgtemp = $temptotal / $num))
+echo "The average weekly temperature for the dates you entered is: " $avgtemp

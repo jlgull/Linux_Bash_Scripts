@@ -1,0 +1,6 @@
+#! /bin/bash
+# jlh for CIS239DL, Fall 2014
+# Shell Script using case to return entry Fee
+# Query user for their age
+read -p "Enter your age to determine entry fee: " age
+

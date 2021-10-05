@@ -1,0 +1,29 @@
+#!/bin/bash
+#set -xv
+YN=1
+while [[ $YN -eq 1 ]]
+do
+	clear
+	echo " MAIN MENU"
+	echo " 1. Long Listing "
+	echo " 2. Current Users"
+	echo " 3. Process Listing"
+	read -p "Enter a valid selection [1-3]" selection
+	case $selection in
+		1) ls -l | more ;;
+		
+		2) who | more ;;
+
+		3) ps | more ;;
+		
+		*) echo "enter a valid selection [ 1-3 ]" ;;
+	esac
+	read -p "Continue (Y/N) ?" YesNO
+YN=`echo $YesNo | tr [:lower:] [:upper:]`
+if [[ $YN = 'Y' ]]
+then 
+    ((YN = 1))
+fi
+done
+set +xv
+

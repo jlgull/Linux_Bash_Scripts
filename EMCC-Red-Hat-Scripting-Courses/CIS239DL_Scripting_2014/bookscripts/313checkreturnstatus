@@ -1,0 +1,26 @@
+#!/bin/bash
+# check the return status from a function
+#
+#set -xv
+function FileExist()
+{
+echo $1
+if [[ -a $1 ]]
+then
+   return 0
+else
+   return 1
+fi
+}
+
+
+if FileExist $1
+then
+   echo $?
+   rm $1
+   echo $1 "File Removed!"
+else
+   echo $?
+   echo "$0: $1:  No such file or directory"
+fi
+#set +xv

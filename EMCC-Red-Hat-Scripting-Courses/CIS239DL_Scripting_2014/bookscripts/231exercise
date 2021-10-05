@@ -1,0 +1,71 @@
+#i!/bin/bash
+# nested if statements for the flowchart on page 231
+# added a usage clause that explains what values to enter
+# uses pattern matching to validate the data entered
+#set -xv
+if [ $# != 3 ]
+then
+#print the directions for correctly calling this script
+{ echo "Script $0 requires exactly 3 single digit parameters"; echo "(1). The FIRST parameter is for destination code: 1 for LAX, 2 for PHX, 3 for DFW, or 4 for OTHER"; echo "(2). The SECOND parameter is for the class code: 1 for FIRST CLASS, 2 for BUSINESS CLASS, 3 for COACH CLASS, and 4 for OTHER CLASS"; echo "(3). The THIRD parameter is for the day of the week code: 1-MONDAY 2-TUESDAY 3-WEDNESDAY 4-THURSDAY 5-FRIDAY 6-SATURDAY 7-SUNDAY"; echo "For example, entering ./231exercise 1 2 4 would be a flight to LAX, Business Class, on Thursday";}| more  
+exit 
+fi
+dest=$1
+class=$2
+day=$3
+destcode=`echo ${dest:0:1}`
+classcode=`echo ${class:0:1}`
+daycode=`echo ${day:0:1}`
+echo $destcode | grep ^[1-4] > /dev/null # if the first parameter entered was not an integer between 1 and 4 inclusive then retval1 will be 1 (fail)
+retval1=$?
+echo $classcode | grep ^[1-4] > /dev/null  #if the second parameter was not an integer between 1 and 4 inclusive then retval2 will be 1 (fail)
+retval2=$?
+echo $daycode | grep ^[1-7] > /dev/null  #if the third parameter entered was not an integer between 1 and 7 inclusive then retval3 will be 1 (fail)
+retval3=$?
+
+
+# the if statement checks to see if any of the parameters ($1,$2,$3) fell 
+# outside the required range
+# if any of the retval's were unsuccessful (exit status = 1) then the input 
+# was faulty
+if [[ $retval1 = 1 || $retval2 = 1 || $retval3 = 1 ]]
+then   
+    if [[ $retval1 -eq 1 ]]
+    then
+         echo "The first parameter you entered $1 is not an integer between 1 and 4 incusive. Please correct."
+         sleep 3
+         echo
+    fi
+    if [[ retval2 -eq 1 ]]
+    then
+         echo "The Second parameter you entered $2 is not an integer between 1 and 4 inclusive. Please correct."
+         sleep 3
+         echo
+    fi
+    if  [[ retval3 -eq 1 ]]
+    then
+         echo  "The third parameter you entered $3 is not an integer between 1 and 7 inclusive. Please correct."
+         echo
+         sleep 3
+    fi
+#print the directions for correctly calling this script
+{ echo "Script $0 requires exactly 3 single digit parameters"; echo "(1). The FIRST parameter is for destination code: 1 for LAX, 2 for PHX, 3 for DFW, or 4 for OTHER"; echo "(2). The SECOND parameter is for the class code: 1 for FIRST CLASS, 2 for BUSINESS CLASS, 3 for COACH CLASS, and 4 for OTHER CLASS"; echo "(3). The THIRD parameter is for the day of the week code: 1-MONDAY 2-TUESDAY 3-WEDNESDAY 4-THURSDAY 5-FRIDAY 6-SATURDAY 7-SUNDAY"; } | more  
+exit 
+fi
+if [[ $dest -eq 1 ]]   # 1 = LAX
+then
+   if [[ $class -eq 3 ]] # 3 = C Class
+   then
+      if [[ $day -eq 6 ]] # 6 = SAT
+      then
+         echo "Coach class to LAX on Saturday costs \$50"
+      else
+         echo "Coach class to LAX not on Saturday costs \$75"
+      fi
+   else
+      echo "Not coach class to LAX is \$80 everyday"
+   fi
+else
+   echo "All flights not going to LAX are \$100"
+fi
+
+#set +xv

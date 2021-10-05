@@ -1,0 +1,7 @@
+#!/bin/bash
+# demonstrate how a for word/number combo list works
+#
+for word_number in desk 3 computer 76 mouse 1289673 flashlight_bulb
+do 
+    echo $word_number
+done

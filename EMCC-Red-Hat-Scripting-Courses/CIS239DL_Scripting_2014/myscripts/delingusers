@@ -1,0 +1,12 @@
+#! /bin/bash
+
+#Delete users
+ clear
+ echo "Deleting users"
+ cat /root/deletthem | while read byebye
+ do
+	userdel -r $byebye
+
+done
+cat /etc/passwd | tail -n 3
+exit

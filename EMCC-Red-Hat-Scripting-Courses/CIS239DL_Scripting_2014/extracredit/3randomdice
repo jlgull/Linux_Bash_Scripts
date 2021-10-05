@@ -1,0 +1,50 @@
+#!/bin/bash
+rm -f /root/rolls
+read -p "Please enter the number of times you want to roll three dice: " rolls
+for (( x = 1; x<=$rolls; x++ ))
+do
+RANGE=7
+echo
+number1=$RANDOM
+let "number1 %= $RANGE"
+if [[ $number1 == 0 ]]
+then
+while [[ $number1 == 0 ]]
+do
+number1=$RANDOM
+let "number1 %=$RANGE"
+done
+fi
+
+number2=$RANDOM
+let "number2 %=$RANGE"
+if [[ $number2 == 0 ]]
+then
+while [[ $number2 == 0 ]]
+do 
+number2=$RANDOM
+let "number2 %=$RANGE"
+done
+fi
+
+number3=$RANDOM
+let "number3 %=$RANGE"
+if [[ $number3 == 0 ]]
+then
+while [[ $number3 == 0 ]]
+do
+number3=$RANDOM
+let "number3 %=$RANGE"
+done
+fi
+#let "number1 %= $RANGE"
+#let "number2 %=$RANGE"
+#let "number3 %=$RANGE"
+
+(( total=$number1+$number2+$number3 ))
+#echo $number1 $number2 $number3 $total >> /root/rolls
+echo $total >> /root/rolls
+done
+
+sort -n /root/rolls | uniq -c
+#rm -f /root/rolls

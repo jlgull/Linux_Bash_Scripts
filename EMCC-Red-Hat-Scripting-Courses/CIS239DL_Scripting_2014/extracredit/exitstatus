@@ -1,0 +1,9 @@
+#!/bin/bash
+# check on the exit status
+#
+while ! cp fileX.txt fileY.txt
+do
+     echo "attempting to copy.............."
+     sleep 1  
+     echo "exit status of the while command is " $?
+done

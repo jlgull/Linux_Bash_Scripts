@@ -1,0 +1,10 @@
+#!/bin/bash
+#Use the && operator
+
+#ls /root; if [ $? -eq 0 ]; then echo "The list command worked."; fi
+
+#Is the same as
+
+#ls /root && echo "The list command worked."
+
+ls rot && echo "The list command worked."

@@ -1,0 +1,20 @@
+#!/bin/bash
+loop=0
+while [[ $loop == 0 ]]
+do
+   read -p "Enter userid: " userid
+   useradd $userid
+bash /root/CIS239/extracredit/1setpassword
+   passwd --stdin $userid < /root/pwordfile 2>errfile.txt 
+   echo "User $userid has been added"
+   read -p "Do you wish to add another user (y or n): " con
+#   chage -d 0 $userid
+if [[ $con == y ]]
+then
+loop=0
+else 
+loop=1
+fi
+#   loop=`echo $con | tr [:upper:] [:lower:]` 
+done
+#exit

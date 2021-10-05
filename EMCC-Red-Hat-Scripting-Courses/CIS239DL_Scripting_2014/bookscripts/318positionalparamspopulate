@@ -1,0 +1,18 @@
+#!/bin/bash
+# Use positional parameters and a for loop to populate an array with 
+# 5 values
+
+if [[ $# -ne 5 ]]
+then
+  echo "You must enter 5 values to be inserted into the array. Thank you."
+fi
+for num in 1 2 3 4 5
+do 
+  ar[0]=$1
+  ar[1]=$2
+  ar[2]=$3
+  ar[3]=$4
+  ar[4]=$5
+done
+echo ${ar[*]}
+

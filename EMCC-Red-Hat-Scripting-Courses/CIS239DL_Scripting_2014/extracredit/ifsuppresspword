@@ -1,0 +1,24 @@
+#!/bin/bash
+# script to make a decision using an if statement as to whether or not to 
+# display the keyboard input on the screen
+# Note that if the keyboard input is suppressed then displaying that input
+# is also suppressed for the subsequent echo command 
+# set -xv
+read -p "Are you going to be entering a password (y or n): " passport1
+if [[ $passport == "y" ]]
+then
+   # option='-s'    # quoting is needed to protect the -s as a value for option
+
+    # next line is is identical to read -s -p "Enter your
+    read -s "Enter your password: " ~/ passport1  
+    echo "this $passport1  was not displayed during password entry"
+     echo" but this is what was recorded. $passport1" 
+    echo "so beware $USER with password of $passport1"
+echo "made it to here"
+else
+    read -p "Enter some data: " data
+    echo $data
+fi
+
+# set +xv
+

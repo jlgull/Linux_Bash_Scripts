@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# use the format  <variable>=`echo "scale=num; (var1 operation var2)" | bc -l` 
+# or <varible>=`echo "scale=num; operation(var1)" | bc -l`     for sqrt,cos,sin,etc
+#where -l is for math library
+
+val2=101
+
+#val1=45
+((val1=90))
+answer=`echo "scale=3; ($val1 * $val2) " | bc -l`
+echo $answer
+
+answer2=`echo "scale=4; ($val1 / $val2)" | bc -l`
+echo $answer2
+
+answer3=`echo "scale=60; sqrt($val1)" | bc -l`
+echo $answer3
+
+

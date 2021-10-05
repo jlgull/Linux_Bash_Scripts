@@ -1,0 +1,19 @@
+#!/bin/bash
+
+((x=10))
+((y=100))
+((t=$y/$x))
+echo $t
+((q=$y/0))
+((t=$y*$x))
+echo $t
+((t=$y+$x))
+echo $t
+((t=$y-$x))
+echo $t
+((t=$y**2))
+echo $t
+((t=$y%$x))
+echo $t
+
+

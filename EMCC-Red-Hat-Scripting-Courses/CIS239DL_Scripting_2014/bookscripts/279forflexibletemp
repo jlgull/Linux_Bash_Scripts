@@ -1,0 +1,16 @@
+#!/bin/bash
+# show the flexibility of the for arithmetic expression; accept variables
+#
+read -p "Enter the number of days: " days
+if [[ $days == "" ]]
+then
+exit
+fi
+for ((num=1; num <=$days; num++))
+do
+     read -p "Enter daily temperature: " temp
+    
+     ((temptotal=$temptotal + temp))
+done
+((avgtemp=$temptotal / $days))
+echo "The average temp was: " $avgtemp

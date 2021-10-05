@@ -1,0 +1,13 @@
+#!/bin/bash
+# Use stop instead of continue for the test condition for until loop
+#
+stop=n
+until [[ $stop = "y" ]]
+do
+      who 
+      ls 
+     read -p "Do you want to stop? (y) " stop
+done
+echo "Stopping..........................."
+sleep 3
+echo "Stopped"

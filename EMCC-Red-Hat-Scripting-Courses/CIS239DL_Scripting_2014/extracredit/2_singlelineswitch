@@ -1,0 +1,67 @@
+#!/bin/bash
+echo "Here is the file that you start with"
+echo
+
+cat switches                                  #show initial state of file to be translated
+sort switches > switchessorted                   #sort initial file
+((i=0))                                         #initialize i to zero   
+cat switchessorted | tr -s [:blank:] : > colswitches   # translate all blanks to : and store result in colmattswitch
+
+while read text                                 #loop to populate matt array with sorted records from colon delimited file
+do
+matt[$i]=$text
+((i++))
+done < colswitches
+
+cat colswitches | cut -d: -f1 > items         #put switch names in items file
+uniq items > uniqitems                          #create a sorted list of all switches with no duplicates 
+cat colswitches | cut -d: -f2 > nums          # put ip's in file called nums
+
+uniq -c items > count                           #create a file that lists the number of occurrences of each switch
+cat count | tr -s " " : > result                #squeeze all blanks to a single colon and store in result file
+cat result | cut -d: -f2 > usethis              #get all the # of ip's for each sorted switch and store in the usethis file
+
+counter=0
+while read text                                #loop to read all lines of ip file (usethis)
+do
+for ((x=1; x <= $text; x++))                   #loop as many times as there are occurrences of a switch
+do
+if [[ $x -eq $text ]]                          #if this is the last switch create a new line with the echo command
+then
+echo ${matt[$counter]} > temp                  #store array element specified by counter in temp file
+result=`cat temp | cut -d: -f2`                #store the ip in result
+echo "$result " >> newnums                     #echo last ip with newline into newnums
+else 
+echo ${matt[$counter]} > temp                  #store array elements specified by counter in temp   
+result=`cat temp | cut -d: -f2`                #store the ip in result
+echo -n "$result " >> newnums                  #store ip with no newline in newmuns
+fi
+((counter++))
+done
+done < usethis
+
+paste uniqitems newnums > final               #paste line by line the files uniqitems (switches) and newnums (ip's on one line)
+cat final |tr [:blank:] :  > thisshouldwork
+echo
+echo
+echo
+echo "Here is the file you end with"
+echo
+cat thisshouldwork
+
+
+echo
+echo
+echo "Now here are the results in an array"
+echo
+((q=0))
+while read text
+do 
+array[$q]=$text
+((q++))
+done <thisshouldwork
+echo ${array[*]}
+
+rm -fr newnums colmattswitch mattswitch1 
+
+

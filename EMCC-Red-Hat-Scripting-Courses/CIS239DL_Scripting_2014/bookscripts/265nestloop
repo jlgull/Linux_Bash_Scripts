@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# demonstate what happens when loops are nested
+# The total number of iterations/passes will always be equal to the
+# product of the inner times the outer
+outer=1
+while [[ $outer -le 3 ]]
+do
+    inner=1
+    while [[ $inner -le 3 ]]
+    do  
+       ((counter=$counter+1))
+        echo $outer $inner
+        ((inner++))
+    done
+    ((outer++))
+done
+echo "there were $counter iterations for this script"
+
+# Total number of iterations will always be the product of all the loops
+#
+#counter=0
+#outer=1
+#while [[ $outer -le 3 ]]
+#do 
+# ((loop1=1))
+#    while [[ $loop1 -le 5 ]]
+#    do
+#       inner=1
+#       while [[ $inner -le 3 ]]
+#       do
+#          ((counter++))
+#          echo $outer $loop1 $inner
+#          ((inner++))
+#       done
+#      ((loop1++))
+#    done
+#    ((outer++))
+ 
+#done
+#echo $counter
+
+

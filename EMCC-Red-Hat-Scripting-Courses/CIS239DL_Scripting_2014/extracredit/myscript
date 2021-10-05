@@ -1,0 +1,49 @@
+#!/bin/bash
+# script needs a wrapper to make it executable
+# script that makes this executable is .wrapmyscript a hidden file
+echo ""
+#echo "If you are reading this then the wrapper was successful at making this script executable, congrats!"
+#echo "Check out the executable status of myscript now and you will see that other has no rights at all, again"
+
+continue="y"
+count=1
+while [[ $continue == "y" ]]
+do
+
+read -p "Enter employee ID: "  empid
+read -p "Enter employee first name: " first
+read -p "Enter employee last name: " last
+read -p "Enter hours worked this pay period: " hours
+read -p "Enter hourly pay rate: " rate
+
+((pay=$hours*$rate))
+
+if [[ $count -eq 1 ]]
+then
+ 
+
+sudo -u root chmod 777 /payroll
+mkdir -p /payroll/`date +%Y%m%d`
+sudo -u root chmod 777 /payroll/`date +%Y%m%d`
+sudo -u root chmod 777 /payroll/`date +%Y%m%d`/*
+sudo -u root echo "ID:First:Last   :hr:rt:pay" > /payroll/`date +%Y%m%d`/record
+sudo -u root echo "$empid:$first:$last:$hours:$rate:$pay" >> /payroll/`date +%Y%m%d`/record
+else
+sudo -u root echo "$empid:$first:$last:$hours:$rate:$pay" >> /payroll/`date +%Y%m%d`/record
+fi
+
+read -p 'Enter another employee? (y or n): ' continue
+
+((count++))
+
+done
+sudo -u root chmod 771 /payroll
+sudo -u root chmod 771 /payroll/`date +%Y%m%d`
+echo "payroll database was successfully udated and stored in /payroll/`date +%Y%m%d`/record"
+echo
+read -p "To view your updates type y or to quit type n: " yorn
+
+if [[ $yorn == "y" ]]
+then
+sudo -u root cat /payroll/`date +%Y%m%d`/record
+fi

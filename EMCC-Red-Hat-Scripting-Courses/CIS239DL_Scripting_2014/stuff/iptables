@@ -1,0 +1,20 @@
+#!/bin/bash
+
+read -p "Input Policy Rule (Drop,Reject,Accept):" policy
+
+iptables -P FORWARD $policy
+
+read -p "How many TCP ports do you want open?" portnum
+
+for ((x=1; x < = $portnum; x++))
+
+do 
+	read -p "Enter port to open: " port
+	
+	if [[ x == 1 ]]
+	then 
+		iptables -I FORWARD -p tcp --destination-port $port -j ACCEPT
+	else
+		iptables -A FORWARD -p tcp --destination-port $port -j ACCEPT
+	fi
+done

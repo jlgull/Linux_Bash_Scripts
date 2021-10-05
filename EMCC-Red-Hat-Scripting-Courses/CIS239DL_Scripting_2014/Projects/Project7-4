@@ -1,0 +1,15 @@
+#!/bin/bash
+# Use of while and until nested loops
+let "x=1"
+while [[ $x -le 5 ]]
+do
+    let "y=4"
+    until [[ $y -le 1 ]]
+    do
+        let y--
+        echo $x $y
+        let c++
+    done
+    let x++
+done
+echo "The number of times looped is: " $c

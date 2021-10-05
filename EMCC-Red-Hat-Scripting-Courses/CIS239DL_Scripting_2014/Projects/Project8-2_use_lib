@@ -1,0 +1,6 @@
+
+#!/bin/bash
+
+source /root/FunLibA 
+GetData
+ProfLoss $Sales $Costs

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+function multiply
+{
+((mult=$1 * $2))
+}
+
+function highest
+{
+if [[ $1 -gt $2  && $1 -gt $3 && $1 -gt $4 ]]
+then
+biggest=$1
+num=1
+elif [[ $2 -gt $1  && $2 -gt $3 && $2 -gt $4 ]]
+then
+biggest= $2
+num=2
+elif [[ $3 -gt $1  && $3 -gt $2 && $3 -gt $4 ]]
+then
+biggest= $3
+num=3
+elif [[ $4 -gt $1 && $4 -gt $2 && $4 -gt $4 ]]
+then
+biggest=$4
+num=4
+fi
+case $num in
+1) if [[ $2 -gt $3 && $2 -gt $4 ]]; then nextbig=$2;elif [[ $3 -gt $2 && $3 -gt $4 ]];then nextbig=$3;elif [[ $4 -gt $2 && $4 -gt $3 ]]; then nextbig=$4;fi;;
+2) if [[ $1 -gt $3 && $1 -gt $4 ]]; then nextbig=$1;elif [[ $3 -gt $1 && $3 -gt $4 ]];then nextbig=$3;elif [[ $4 -gt $1 && $4 -gt $3 ]]; then nextbig=$4;fi;;
+3) if [[ $1 -gt $2 && $1 -gt $4 ]]; then nextbig=$1;elif [[ $2 -gt $3 && $2 -gt $4 ]];then nextbig=$2;elif [[ $4 -gt $1 && $4 -gt $2 ]]; then nextbig=$4;fi;;
+esac
+
+multiply $biggest $nextbig
+
+}
+
+
+#read -p "Enter product price: " price
+#read -p "Enter product quantity: " quantity
+highest $1 $2 $3 $4
+#multiply $price $quantity
+
+echo "The total price is $mult"

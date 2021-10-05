@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# restore the employees file to its original content
+cp 2employees employees
+# remove contents of employee.raise file to show new contents only
+rm -f employee.raise
+
+# show the records before updating the salaries
+echo
+echo " *********Employee salaries before raise*********"
+echo
+cat employees
+
+echo
+
+#read all records in the employees file
+while read emprec
+do
+#set variables eqaul to each field in the employees file
+empid=`echo $emprec | cut -d: -f1`
+name=`echo $emprec | cut -d: -f2`
+salary=`echo $emprec | cut -d: -f3`
+#create a variable to hold the new calculated salary using bc
+newsal=`echo "scale=2; ($salary * 1.04)" | bc -l`
+#insert the existing id and name with the new salary in a file
+echo $empid:$name:$newsal >> employee.raise
+done < employees  #read in records from the employees file
+
+echo "*********Employee salaries after raise*********"
+echo
+#show the changes to the salaries in a new file, original file remains unchanged
+cat employee.raise

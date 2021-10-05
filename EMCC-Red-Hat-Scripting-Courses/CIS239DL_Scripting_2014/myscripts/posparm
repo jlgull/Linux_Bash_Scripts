@@ -1,0 +1,15 @@
+#! /bin/bash
+
+# Test for 2 positional parameters:
+
+if [[ $# -ne 2 ]]
+then
+	echo "USAGE: You must enter 2 positional parameters for script $0 to run"
+	exit
+fi
+
+echo "The name of this script is $0"
+echo "The first parameter is $1"
+echo "The second parameter is $2"
+
+echo $0 $1 $2

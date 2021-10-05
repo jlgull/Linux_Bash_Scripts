@@ -1,0 +1,37 @@
+#!/bin/bash
+# script will display all attached cards (active or not) with their corresponding ip, broadcast, and netmask
+
+counter1=1
+counter2=1
+
+declare -a card
+declare -a ip
+
+ifconfig -a | grep -v "^ "| tr -s " " : | cut -d: -f1 > /root/first
+while read text
+do
+card[$counter1]=$text
+((counter1++))
+done </root/first
+
+
+ifconfig -a | egrep '.*\..*\..*\..*' | tr -s " " : | cut -d: -f4,5,6,7,8 > /root/second
+while read text
+do 
+ip[$counter2]=$text
+((counter2++))
+done < /root/second
+
+echo
+echo -e "${card[1]} \t  ${ip[1]}"
+echo 
+echo -e "${card[3]} \t  ${ip[2]}" 
+echo
+echo -e "${card[5]} \t  ${ip[3]}"
+echo
+echo -e "${card[7]} \t  ${ip[4]}" 
+echo 
+
+
+
+

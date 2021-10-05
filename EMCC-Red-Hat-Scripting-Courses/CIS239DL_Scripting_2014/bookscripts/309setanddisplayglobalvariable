@@ -1,0 +1,22 @@
+#!/bin/bash
+# demonstrate the use of setting a global variable
+#
+function function1
+{
+   ((x=5))
+   echo "x's value within function1: " $x
+}
+
+
+function function2
+{
+   ((x=6))
+   echo "x's value within function2: " $x
+}
+
+((x=10))
+echo "x's value outside function1 before function1 is called: " $x
+function1
+echo "x's value outside function1 after function1 is called and before function2: " $x
+function2
+echo "x's value outside function2 after function2 is called: " $x

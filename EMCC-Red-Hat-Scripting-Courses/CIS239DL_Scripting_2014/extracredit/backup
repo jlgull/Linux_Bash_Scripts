@@ -1,0 +1,80 @@
+#!/bin/bash
+source /root/.bash_profile
+export a
+echo $a
+sleep 3
+b=$a
+mkdir -p /backup/archive                       #force the creation of /backup/archive
+#mv -i /test_bu/* /backup/archive               #
+for ((i=1;i<3;i++))
+do
+   touch /root/test_bu/*.dat
+   clear
+   echo "backing up number $i data files..."
+   sleep 5
+   clear
+   echo "backing up number $i data files......"
+   sleep 5
+   clear
+   echo "backing up number $i data files........."
+   sleep 5
+   clear
+   echo "backing up number $i data files............"
+   sleep 5
+   clear
+   echo "backing up number $i data files..............."
+   sleep 5
+   clear
+   echo "backing up number $i data files.................."
+   sleep 5
+   clear
+   echo "backing up number $i data files....................."
+   sleep 5
+   clear
+   echo "backing up number $i data files........................"
+   sleep 5
+   clear
+   echo "backing up number $i data files..........................."
+   sleep 5
+   clear
+   echo "backing up number $i data files.............................."
+   sleep 5
+   echo " backing up number $i data files................................"
+   clear
+   echo "All number $i data files successfully backed up"
+   sleep 2
+   clear
+   when=`date`
+   mkdir -p /backup/archive/"$i"bu"$when"
+   #cd /root
+   find /root/test_bu -amin 1 >> /root/captured
+     while read text
+     do
+        cp -f $text /backup/archive/"$i"bu"$when" 2>/dev/null
+     done < /root/captured
+   rm /root/captured
+done
+((num=i-1)) 
+echo "All $num data files were successfull backed up!"
+#cd /backup
+ls
+find /backup/archive -type d >> /root/captured
+
+while read text
+do
+((counter++))
+echo $counter
+done < /root/captured
+
+echo $counter
+rm -f /root/captured
+if [[ $counter -gt 2 ]]
+then
+temp1=`ls /backup/archive`
+echo $temp1
+erase1=${temp1:0:3}
+echo "$erase1 this is erase1"
+echo "Removing $temp1"
+cd /backup/archive
+#rm -fr "$erase1"*
+fi 
