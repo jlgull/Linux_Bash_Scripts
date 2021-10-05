@@ -35,7 +35,11 @@ do
 
 	if [[ $Num -gt $Max ]]
 	then
-		Max=$(($Num))
+
+# Revised line, per comment from Tracy Baker.
+
+#		Max=$(($Num))
+		Max=$Num
 	fi
 
 done
