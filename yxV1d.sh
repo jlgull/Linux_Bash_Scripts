@@ -15,17 +15,6 @@ Odd=0; Even=0
 # Making sure Seed is blank
 Seed=""
 
-# Declaring arrays for loop detection.
-# MasterList is an array that stores all numbers
-# LoopList is an array that stores the numbers in a loop
-# j is the counter to control LoopList elements
-# k is the counter to control MasterList entries
-MasterList=(); LoopList=(), j=0; k=0
-
-# If log is passed on the command line, write output to yx.log
-# By default, do not write to yx.log
-LOG=no
-
 # End of Variables
 
 # Just a simple function to create blank lines
@@ -34,24 +23,7 @@ function BL
 	echo; echo
 }
 
-# A function to output to screen and maybe the yx.log file
-function Output ()
-{
-	if [[ $LOG != "yes" ]]
-	then
-		echo; echo $1
-	else
-		echo; echo $1 | tee -a yx.log
-	fi
-}
-
 clear
-
-# If log is passed form the command line, set LOG to yes to write to yx.log
-if [[ $1 == "log" ]]
-then
-	LOG=yes
-fi
 
 # Testing some other "yx+1" scenarios. Note that y must be odd
 # 
@@ -69,22 +41,12 @@ fi
 while :
 do
 	echo "Choose which to run:"
-	echo; echo "(3) 3x+1"
-	echo "    [loop found]"
-	echo "    4 2 1                             (seeds: all integers[?])"
+	echo; echo "(3) 3x+1 [ends with looping 4,2,1]"
 	echo; echo "(5) 5x+1"
-	echo "    [loops found]"
-	echo "    26 13 66 33 166 83 416 208 104 52 (seeds: 5, 10, 13)"
-	echo "    17 86 43 216 108 54 27 136 68 34  (seeds: 17)"
-	echo "    8 4 2 1 6 3 16                    (seeds: 2, 3, 4, 6, 8, 12)"
-	echo "    may not loop                      (seeds: 7, 9, 11, 14, 18)"
-	echo; echo "(7) 7x+1"
-	echo "    [loops found]"
-	echo "    8 4 2 1                           (seeds: 2, 4, 5, 8, 9, 10, 19)"
-	echo "    may not loop                      (seeds: 3, 6, 7)"
-	echo; echo "(9) 9x+1"
-	echo "    [loops found]"
-	echo "    may not loop                      (seeds: all integers[?])"
+	echo "    [ends with looping 66,33,166,83,416,208,104,52,26,13  OR  6,3,16,8,4,2,1"
+        echo "     OR  may not loop]"
+	echo; echo "(7) 7x+1 [ends with looping 8,4,2,1  OR  may not loop]"
+	echo; echo "(9) 9x+1 [probably doesn't loop]"
 	echo; echo "(Z) Exit the script."
 
 	echo; read -n1 -p "Choose 3, 5, 7, 9 or Z: " Multiplier
@@ -96,6 +58,22 @@ do
 	esac
 done
 
+# Set limits
+case $Multiplier in
+	3) EndNum1=1; EndNum2=1 ;;
+	5) EndNum1=1; EndNum2=13 ;;
+	7) EndNum1=1; EndNum2=1 ;;
+	9) EndNum1=0; EndNum2=0 ;;
+esac
+
+# allow it to run for 50,000 if y is pressed
+BL; echo "Run for 50,000 iterations to look for patterns?"
+read -n1 -p "[y = yes, anything else = no] " Choice
+if [[ $Choice == "y" ]]
+then
+	EndNum1=0; EndNum2=0
+fi
+
 # Get the Seed (starting number)
 while :
 do
@@ -105,11 +83,7 @@ do
 	# If user pressed enter at the prompt, assign a random number to Seed
 	if [[ $Seed == "" ]]
 	then
-#		Seed=$RANDOM  ## This is limited to a max of 32768
-		while [[ $Seed -le 0 ]]
-		do
-			Seed=$(od -An -N4 -i < /dev/urandom | tr -d ' ')
-		done
+		Seed=$RANDOM
 		echo; echo "The random number chosen is: $Seed"
 	fi
 
@@ -121,15 +95,6 @@ do
 	fi
 done
 
-# Ask user: How iterations, default is 100
-Iterations=""
-echo; echo "Enter the number of iterations to run. Script will automatically stop if a loop is found."
-read -p "(press Enter for the default of 100): " Iterations
-if [[ $Iterations == "" ]]
-then
-	Iterations=100
-fi
-
 ### Assign Seed to Num and to Max
 # Seed will be maintained for future use.
 # Num will be used for processing.
@@ -140,7 +105,6 @@ Num=$Seed; Max=$Seed
 # and if the Num being processed is a power of 2
 if [[ Multiplier -eq 3 ]]
 then
-	echo
 	if [[ $(($Seed & $Seed-1)) == 0 ]]
 	then
 	        echo "The Seed, $Seed, is a power of 2."
@@ -154,9 +118,17 @@ fi
 
 echo
 
-while :
+while [[ $Num != $EndNum1 && $Num != $EndNum2 ]]
 do
-	TempNum=$Num
+	# If increment hits 50,000, go ahead and exit
+	if [[ $i -gt 50000 ]]
+	then
+		BL; echo "Hit 50,000 iterations, exiting."; echo
+		((i--))
+		break
+	fi
+	
+	TempNum=$Num	
 
 	# Determine if Num is odd or even
 	if [[ $(($Num%2)) == 0 ]]
@@ -174,73 +146,39 @@ do
 		((Odd++))
 	fi
 
-	# Keep track of the greatest number calculated
-	if [[ $Num -gt $Max ]]
-	then
-		Max=$Num
-	fi
-
-	## Loop Detection
-	if [[ $Iterations != "" ]]
-	then
-		# If Num is already in MasterList, a loop was found
-		if [[ ${MasterList[*]} =~ $(echo "\<$Num\>") ]]
-		then
-			# If the Num exists in LoopList, break out, because we've just
-			# discovered where the loop restarts. Otherwise, add it to LoopList
-			if [[ ${LoopList[*]} =~ $(echo "\<$Num\>") ]]
-			then
-				break
-			else
-				LoopList[$j]=$Num; ((j++))
-			fi
-		fi
-		
-		# Add Num to MasterList
-		MasterList[$k]=$Num; ((k++))
-	fi
-
 	# If Num is negative, break
 	if [[ $Num -lt 0 ]]
 	then
 		BL; echo "Breaking due to a negative number."; break
 	fi
 	
-	# If increment hits $Iterations, break
-	if [[ $Iterations != "" ]]
+	# Only increment if Num is not equal to EndNum1 and EndNum2
+	# otherwise, the final increment is off by 1
+	if [[ $Num -ne $EndNum1 && $Num -ne $EndNum2 ]]
 	then
-		if [[ $i -eq $Iterations ]]
+		((i++))
+	else
+		if [[ $Multiplier -eq 5 ]]
 		then
-			BL; echo "Hit $Iterations iterations, exiting."; echo
-			break
+			echo; echo "The result is $Num, one of the ending numbers for 5x+1."
+		else
+			echo; echo "The result is equal to 1, the end has been reached."
 		fi
 	fi
-	
-	((i++))
+
+	# Keep track of the greatest number calculated
+	if [[ $Num -gt $Max ]]
+	then
+		Max=$Num
+	fi
 done
 
 # Some statistics
-Output "Equation: ${Multiplier}x+1"
-Output "Initial Number = $Seed"
+echo; echo "Equation: ${Multiplier}x+1"
+echo; echo "Initial Number = $Seed"
 echo; echo "Largest Number = $Max"
 echo; echo "Total iterations = $i"
 echo; echo "There were $Even even numbers ($(echo "scale=3; $Even/$i*100" | bc)%) and $Odd odd ($(echo "scale=3; $Odd/$i*100" | bc)%) numbers."
-
-# If j is not equal to 0, a loop was found
-if [[ $j -gt 0 ]]
-then
-	Output "A loop was found! (${LoopList[*]})"
-	Output "MasterList[] is:  (${MasterList[*]})"
-else
-	Output "No loop was discovered."
-fi
-
-if [[ $LOG == "yes" ]]
-then
-	echo "--------------------" >> yx.log
-fi
-
-echo
 
 #
 # End of file
